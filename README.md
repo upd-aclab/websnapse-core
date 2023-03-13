@@ -1,6 +1,8 @@
-# `websnapse-3`
+# `automata`
 
-Hypothetical WebSnapse upgrade project. Maybe I'll get ahold of this in Y3 S1, but I think it'd be helpful to lay out some preliminaries so that I can hit the ground running.
+Automata simulator! Also a test project in case I get ahold of WebSnapse in the future.
+
+~~Hypothetical WebSnapse upgrade project. Maybe I'll get ahold of this in Y3 S1, but I think it'd be helpful to lay out some preliminaries so that I can hit the ground running.~~
 
 ## Tech Stack
 
@@ -15,7 +17,7 @@ This covers the frontend bits.
   - Vitest
   - Playwright
 
-WebSnapse is a project that I feel is very "testable": given that SN P systems (and their simulations) are essentially algorithmic entities, the tests shouldn't be that difficult to come up with.
+`automata` ~~WebSnapse~~ is a project that I feel is very "testable": given that SN P systems (and their simulations) are essentially algorithmic entities, the tests shouldn't be that difficult to come up with.
 
 Playwright is there for E2E testing purposes.
 
