@@ -1,28 +1,25 @@
-# Create T3 App
+# `websnapse-3`
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Hypothetical WebSnapse upgrade project. Maybe I'll get ahold of this in Y3 S1, but I think it'd be helpful to lay out some preliminaries so that I can hit the ground running.
 
-## What's next? How do I make an app with this?
+## Tech Stack
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- `create-t3-app`
+  - Next.js
+  - TypeScript
+  - Tailwind CSS
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+This covers the frontend bits.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- Testing
+  - Vitest
+  - Playwright
 
-## Learn More
+WebSnapse is a project that I feel is very "testable": given that SN P systems (and their simulations) are essentially algorithmic entities, the tests shouldn't be that difficult to come up with
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Playwright is there for E2E testing purposes.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- Backend?
+  - idk really
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+This may be the first personal project where I sink deep into backend work: it's kinda exciting! I'm planning on exploring cutting-edge technologies for this: MERN may work, but I want to familiarize myself with something new that can possibly make backend 'click' with me.
