@@ -15,11 +15,15 @@ This covers the frontend bits.
   - Vitest
   - Playwright
 
-WebSnapse is a project that I feel is very "testable": given that SN P systems (and their simulations) are essentially algorithmic entities, the tests shouldn't be that difficult to come up with
+WebSnapse is a project that I feel is very "testable": given that SN P systems (and their simulations) are essentially algorithmic entities, the tests shouldn't be that difficult to come up with.
 
 Playwright is there for E2E testing purposes.
 
 - Backend?
-  - idk really
+  - file uploads/downloads
+  - database for community-contributed samples
 
 This may be the first personal project where I sink deep into backend work: it's kinda exciting! I'm planning on exploring cutting-edge technologies for this: MERN may work, but I want to familiarize myself with something new that can possibly make backend 'click' with me.
+
+- Deployment
+  - in Vercel we trust
