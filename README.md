@@ -5,14 +5,20 @@ Hello! This is the project that converges all WebSnapse projects from the CS 198
 ## Tech Stack
 
 - `create-t3-app`
+
   - Next.js
   - TypeScript
   - Tailwind CSS
+
 - Testing
+
   - Vitest
   - Playwright
+
 - Backend?
+
   - file uploads/downloads
   - database for community-contributed samples
+
 - Deployment
   - in Vercel we trust
