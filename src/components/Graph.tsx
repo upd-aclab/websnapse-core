@@ -17,8 +17,11 @@ const DraggableNode = ({ id, contents }: DraggableNodeProps) => {
       <div
         ref={nodeRef}
         id={id}
-        className="flex w-fit items-center justify-center rounded-md border-2 border-solid border-black bg-white px-3 py-1 text-black hover:cursor-move"
+        className="relative flex w-fit items-center justify-center rounded-md border-2 border-solid border-black bg-white px-3 py-1 text-black hover:cursor-move"
       >
+        <span className="absolute -left-6 -top-6">
+          <InlineMath math="n_{1}" />
+        </span>
         {contents}
       </div>
     </Draggable>
