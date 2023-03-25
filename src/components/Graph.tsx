@@ -17,7 +17,7 @@ const DraggableNode = ({ id, contents }: DraggableNodeProps) => {
       <div
         ref={nodeRef}
         id={id}
-        className="flex w-fit items-center justify-center rounded-md bg-white px-3 py-1 text-black hover:cursor-move"
+        className="flex w-fit items-center justify-center rounded-md border-2 border-solid border-black bg-white px-3 py-1 text-black hover:cursor-move"
       >
         {contents}
       </div>
@@ -27,7 +27,7 @@ const DraggableNode = ({ id, contents }: DraggableNodeProps) => {
 
 const Graph = () => {
   return (
-    <div className="h-[20rem] w-full bg-black">
+    <div className="h-[20rem] w-full border border-solid border-black">
       <Xwrapper>
         <DraggableNode
           id="0"
@@ -37,7 +37,17 @@ const Graph = () => {
           id="1"
           contents={<InlineMath math="a^{2}/a \rightarrow a; 1" />}
         />
-        <Xarrow start="0" end="1" />
+        <Xarrow
+          start="0"
+          end="1"
+          path="straight"
+          color="lightgray"
+          labels={
+            <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-solid border-black bg-white">
+              <InlineMath math="1" />
+            </div>
+          }
+        />
       </Xwrapper>
     </div>
   );

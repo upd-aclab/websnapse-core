@@ -8,11 +8,11 @@ const Home: NextPage = () => {
       <Head>
         <title>WebSnapse</title>
       </Head>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        <h1 className="mb-3 text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          <span className="text-[hsl(280,100%,70%)]">Auto</span>mata
+      <main className="font-display">
+        <h1 className="py-2 text-center text-4xl font-bold">
+          <span className="text-lilac">Web</span>Snapse
+          <span className="ml-2 text-2xl opacity-50">core</span>
         </h1>
-        <h2 className="mb-5 text-3xl text-white">Empowering theory.</h2>
         <Graph />
       </main>
     </>
