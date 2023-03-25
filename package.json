@@ -12,10 +12,10 @@
     "next": "^13.2.4",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
-    "react-archer": "^4.2.3",
     "react-dom": "18.2.0",
     "react-draggable": "^4.4.5",
     "react-katex": "^3.0.1",
+    "react-xarrows": "^2.0.2",
     "zod": "^3.21.4"
   },
   "devDependencies": {

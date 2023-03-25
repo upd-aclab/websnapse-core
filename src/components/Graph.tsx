@@ -1,6 +1,7 @@
 import Xarrow, { useXarrow, Xwrapper } from "react-xarrows";
 import Draggable from "react-draggable";
 import { InlineMath } from "react-katex";
+import { useRef } from "react";
 
 interface DraggableNodeProps {
   id: string;
@@ -9,9 +10,12 @@ interface DraggableNodeProps {
 
 const DraggableNode = ({ id, contents }: DraggableNodeProps) => {
   const updateXArrow = useXarrow();
+  const nodeRef = useRef(null);
+
   return (
-    <Draggable onDrag={updateXArrow} onStop={updateXArrow}>
+    <Draggable onDrag={updateXArrow} onStop={updateXArrow} nodeRef={nodeRef}>
       <div
+        ref={nodeRef}
         id={id}
         className="flex w-fit items-center justify-center rounded-md bg-white px-3 py-1 text-black hover:cursor-move"
       >

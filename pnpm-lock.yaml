@@ -19,10 +19,10 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.2.5
   prop-types: ^15.8.1
   react: 18.2.0
-  react-archer: ^4.2.3
   react-dom: 18.2.0
   react-draggable: ^4.4.5
   react-katex: ^3.0.1
+  react-xarrows: ^2.0.2
   tailwindcss: ^3.2.7
   typescript: ^5.0.2
   zod: ^3.21.4
@@ -31,10 +31,10 @@ dependencies:
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
   prop-types: 15.8.1
   react: 18.2.0
-  react-archer: 4.2.3_szijl2e4bibnpuzzy46pnxysiq
   react-dom: 18.2.0_react@18.2.0
   react-draggable: 4.4.5_biqbaboplfbrettd7655fr4n2y
   react-katex: 3.0.1_sh5qlbywuemxd2y3xkrw2y2kr4
+  react-xarrows: 2.0.2_react@18.2.0
   zod: 3.21.4
 
 devDependencies:
@@ -344,9 +344,11 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
       csstype: 3.1.1
+    dev: true
 
   /@types/scheduler/0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
+    dev: true
 
   /@types/semver/7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
@@ -770,6 +772,7 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+    dev: true
 
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
@@ -1815,6 +1818,10 @@ packages:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
+  /lodash/4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: false
+
   /loose-envify/1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
@@ -2254,20 +2261,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /react-archer/4.2.3_szijl2e4bibnpuzzy46pnxysiq:
-    resolution: {integrity: sha512-/vuokkuEuaf/kg5u766Ythb2Ssxp/lGw6sthGLJl9lZetTe3Z6bOfoQtT8Yo45LyPHky6ovbAKkmTnC1j8pQpg==}
-    peerDependencies:
-      '@types/react': ^16.8.8 || ^17 || ^18
-      prop-types: ^15.6.2
-      react: ^16.9.0 || ^17 || ^18
-    dependencies:
-      '@types/react': 18.0.28
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-fast-compare: 2.0.4
-      resize-observer-polyfill: 1.5.0
-    dev: false
-
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -2290,10 +2283,6 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /react-fast-compare/2.0.4:
-    resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
-    dev: false
-
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -2304,6 +2293,17 @@ packages:
       react: '>=15.3.2 <=18'
     dependencies:
       katex: 0.16.4
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
+  /react-xarrows/2.0.2_react@18.2.0:
+    resolution: {integrity: sha512-tDlAqaxHNmy0vegW/6NdhoWyXJq1LANX/WUAlHyzoHe9BwFVnJPPDghmDjYeVr7XWFmBrVTUrHsrW7GKYI6HtQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+    dependencies:
+      '@types/prop-types': 15.7.5
+      lodash: 4.17.21
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
@@ -2340,10 +2340,6 @@ packages:
       define-properties: 1.2.0
       functions-have-names: 1.2.3
     dev: true
-
-  /resize-observer-polyfill/1.5.0:
-    resolution: {integrity: sha512-M2AelyJDVR/oLnToJLtuDJRBBWUGUvvGigj1411hXhAdyFWqMaqHp7TixW3FpiLuVaikIcR1QL+zqoJoZlOgpg==}
-    dev: false
 
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
