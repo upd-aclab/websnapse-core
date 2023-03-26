@@ -16,7 +16,7 @@ const Synapse = ({ data }: Props) => {
       path="straight"
       color="lightgray"
       labels={
-        <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-solid border-black bg-white">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
           <InlineMath math={`${weight}`} />
         </div>
       }
