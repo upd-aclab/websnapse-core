@@ -21,6 +21,7 @@ const Builder = ({ system, setSystem }: Props) => {
         <NeuronSelector
           neurons={system.neurons}
           setSelectedNeuron={setSelectedNeuron}
+					setSelectedRule={setSelectedRule}
         />
         <NeuronBuilder
           neuron={

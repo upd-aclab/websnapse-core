@@ -6,9 +6,14 @@ import type Neuron from "~/types/Neuron";
 interface Props {
   neurons: Neuron[];
   setSelectedNeuron: Dispatch<SetStateAction<number>>;
+  setSelectedRule: Dispatch<SetStateAction<number>>;
 }
 
-const NeuronSelector = ({ neurons, setSelectedNeuron }: Props) => {
+const NeuronSelector = ({
+  neurons,
+  setSelectedNeuron,
+  setSelectedRule,
+}: Props) => {
   return (
     <div className="w-full">
       <DropdownMenu.Root>
@@ -29,7 +34,10 @@ const NeuronSelector = ({ neurons, setSelectedNeuron }: Props) => {
                 <DropdownMenu.Item
                   key={index}
                   className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
-                  onClick={() => setSelectedNeuron(id)}
+                  onClick={() => {
+                    setSelectedNeuron(id);
+                    setSelectedRule(0);
+                  }}
                 >
                   <InlineMath math={`${label}`} />
                 </DropdownMenu.Item>
