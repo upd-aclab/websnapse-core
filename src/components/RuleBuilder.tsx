@@ -85,7 +85,7 @@ const RuleBuilder = ({
   return (
     <div className="flex flex-col gap-3">
       <div>
-        Currently editing rule #{selectedRule} in neuron{" "}
+        Currently editing rule #{selectedRule} (0-indexed) in neuron{" "}
         <InlineMath math={`${neuron.label}`} />:
       </div>
       <div className="flex flex-col gap-3">
