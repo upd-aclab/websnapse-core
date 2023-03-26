@@ -2,8 +2,8 @@ import type Rule from "./Rule";
 
 interface Neuron {
   id: number;
-  spikes: number;
   label: string;
+  spikes: number;
   rules: Rule[];
 }
 

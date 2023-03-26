@@ -2,11 +2,9 @@ import { Xwrapper } from "react-xarrows";
 import Neuron from "./Neuron";
 import System from "~/types/System";
 import Synapse from "./Synapse";
-import { type Dispatch, type SetStateAction } from "react";
 
 interface Props {
   system: System;
-  setSystem: Dispatch<SetStateAction<System>>;
 }
 
 const System = ({ system }: Props) => {
@@ -19,12 +17,12 @@ const System = ({ system }: Props) => {
   ));
 
   return (
-    <div className="relative h-[80vh] w-full border border-solid border-black p-10">
+    <section className="relative h-auto w-full p-10">
       <Xwrapper>
         {neuronsJSX}
         {synapsesJSX}
       </Xwrapper>
-    </div>
+    </section>
   );
 };
 

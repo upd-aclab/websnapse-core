@@ -21,6 +21,12 @@ const DefaultSystem: System = {
           produced: 1,
           delay: 0,
         },
+        {
+          regex: "a^{2}",
+          consumed: 1,
+          produced: 1,
+          delay: 1,
+        },
       ],
     },
     {
