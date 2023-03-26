@@ -1,8 +1,12 @@
-import { type NextPage } from "next";
 import Head from "next/head";
-import Graph from "~/components/Graph";
+import System from "~/components/System";
+import { useState } from "react";
+import { DefaultSystem } from "~/types/System";
+import { type NextPage } from "next";
 
 const Home: NextPage = () => {
+  const [system, setSystem] = useState(DefaultSystem);
+
   return (
     <>
       <Head>
@@ -13,7 +17,7 @@ const Home: NextPage = () => {
           <span className="text-lilac">Web</span>Snapse
           <span className="ml-2 text-2xl opacity-50">core</span>
         </h1>
-        <Graph />
+        <System system={system} />
       </main>
     </>
   );
