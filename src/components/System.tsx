@@ -19,7 +19,7 @@ const System = ({ system }: Props) => {
   ));
 
   return (
-    <div className="h-[20rem] w-full border border-solid border-black">
+    <div className="relative h-[80vh] w-full border border-solid border-black p-10">
       <Xwrapper>
         {neuronsJSX}
         {synapsesJSX}

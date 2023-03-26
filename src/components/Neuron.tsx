@@ -16,11 +16,16 @@ const Neuron = ({ data }: Props) => {
   const { id, spikes, label, rules } = data;
 
   return (
-    <Draggable onDrag={updateXArrow} onStop={updateXArrow} nodeRef={nodeRef}>
+    <Draggable
+      onDrag={updateXArrow}
+      onStop={updateXArrow}
+      nodeRef={nodeRef}
+      bounds="parent"
+    >
       <div
         ref={nodeRef}
         id={`${id}`}
-        className="relative flex w-fit items-center justify-center rounded-md border-2 border-solid border-black bg-white px-3 py-1 text-black hover:cursor-move"
+        className="absolute top-[100px] left-[100px] flex w-fit items-center justify-center rounded-md border-2 border-solid border-black bg-white px-3 py-1 text-black hover:cursor-move"
       >
         <span className="absolute -left-6 -top-6">
           <InlineMath math={`${label}`} />

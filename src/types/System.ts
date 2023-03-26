@@ -13,7 +13,7 @@ const DefaultSystem: System = {
     {
       id: 1,
       spikes: 0,
-      label: "n_0",
+      label: "n_{0}",
       rules: [
         {
           regex: "a",
