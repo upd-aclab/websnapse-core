@@ -14,10 +14,14 @@ const DefaultSystem: System = {
       id: 1,
       spikes: 0,
       label: "n_0",
-      regex: "a",
-      consumed: 2,
-      produced: 1,
-      delay: 0,
+      rules: [
+        {
+          regex: "a",
+          consumed: 2,
+          produced: 1,
+          delay: 0,
+        },
+      ],
     },
   ],
   synapses: [],

@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { InlineMath } from "react-katex";
 import { useXarrow } from "react-xarrows";
 import type NeuronType from "~/types/Neuron";
+import Rule from "./Rule";
 
 interface Props {
   data: NeuronType;
@@ -12,11 +13,7 @@ const Neuron = ({ data }: Props) => {
   const updateXArrow = useXarrow();
   const nodeRef = useRef(null);
 
-  const { id, spikes, label, regex, consumed, produced, delay } = data;
-
-  const consumption = `${consumed > 1 ? `a^{${consumed}}` : "a"}`;
-  const production = `${produced > 1 ? `a^{${produced}}` : "a"}`;
-  const ruleString = `${regex}/${consumption} \\rightarrow ${production}; ${delay}`;
+  const { id, spikes, label, rules } = data;
 
   return (
     <Draggable onDrag={updateXArrow} onStop={updateXArrow} nodeRef={nodeRef}>
@@ -30,7 +27,9 @@ const Neuron = ({ data }: Props) => {
         </span>
         <div className="flex flex-col items-center">
           <InlineMath math={`${spikes}`} />
-          <InlineMath math={`${ruleString}`} />
+          {rules.map((rule, index) => (
+            <Rule key={index} data={rule} />
+          ))}
         </div>
       </div>
     </Draggable>

@@ -1,11 +1,10 @@
+import type Rule from "./Rule";
+
 interface Neuron {
   id: number;
   spikes: number;
   label: string;
-  regex: string;
-  consumed: number;
-  produced: number;
-  delay: number;
+  rules: Rule[];
 }
 
 export default Neuron;
