@@ -18,42 +18,50 @@ const Builder = ({ system, setSystem }: Props) => {
   const [selectedSynapse, setSelectedSynapse] = useState(0);
 
   return (
-    <section className="w-[40%] border-r-2 border-solid border-lilac px-5 text-sm">
-      <h1 className="mt-5 mb-3 text-3xl font-bold">Builder</h1>
-      <div className="flex flex-col gap-5">
-        <NeuronSelector
-          neurons={system.neurons}
-          setSelectedNeuron={setSelectedNeuron}
-          setSelectedRule={setSelectedRule}
-        />
-        <NeuronBuilder
-          neuron={
-            system.neurons.find((neuron) => neuron.id === selectedNeuron)!
-          }
-          selectedNeuron={selectedNeuron}
-          setSystem={setSystem}
-        />
-        <RuleSelector
-          neuron={system.neurons.find((neuron) => neuron.id === selectedNeuron)}
-          setSelectedRule={setSelectedRule}
-        />
-        <RuleBuilder
-          neuron={
-            system.neurons.find((neuron) => neuron.id === selectedNeuron)!
-          }
-          selectedNeuron={selectedNeuron}
-          selectedRule={selectedRule}
-          setSystem={setSystem}
-        />
-        <SynapseSelector
-          synapses={system.synapses}
-          setSelectedSynapse={setSelectedSynapse}
-        />
-        <SynapseBuilder
-          synapse={system.synapses[selectedSynapse]!}
-          selectedSynapse={selectedSynapse}
-          setSystem={setSystem}
-        />
+    <section className="w-[40%] border-r-2 border-solid border-lilac text-sm">
+      <h1 className="px-5 pt-3 text-3xl font-bold">Builder</h1>
+      <div>
+        <div className="flex flex-col gap-3 p-5">
+          <NeuronSelector
+            neurons={system.neurons}
+            setSelectedNeuron={setSelectedNeuron}
+            setSelectedRule={setSelectedRule}
+          />
+          <NeuronBuilder
+            neuron={
+              system.neurons.find((neuron) => neuron.id === selectedNeuron)!
+            }
+            selectedNeuron={selectedNeuron}
+            setSystem={setSystem}
+          />
+        </div>
+        <div className="flex flex-col gap-3 border-t-2 border-solid border-lilac p-5">
+          <RuleSelector
+            neuron={system.neurons.find(
+              (neuron) => neuron.id === selectedNeuron
+            )}
+            setSelectedRule={setSelectedRule}
+          />
+          <RuleBuilder
+            neuron={
+              system.neurons.find((neuron) => neuron.id === selectedNeuron)!
+            }
+            selectedNeuron={selectedNeuron}
+            selectedRule={selectedRule}
+            setSystem={setSystem}
+          />
+        </div>
+        <div className="flex flex-col gap-3 border-t-2 border-solid border-lilac p-5">
+          <SynapseSelector
+            synapses={system.synapses}
+            setSelectedSynapse={setSelectedSynapse}
+          />
+          <SynapseBuilder
+            system={system}
+            selectedSynapse={selectedSynapse}
+            setSystem={setSystem}
+          />
+        </div>
       </div>
     </section>
   );

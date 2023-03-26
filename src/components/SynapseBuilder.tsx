@@ -1,15 +1,14 @@
 import { type Dispatch, type SetStateAction } from "react";
 import { InlineMath } from "react-katex";
-import type Synapse from "~/types/Synapse";
 import type System from "~/types/System";
 
 interface Props {
-  synapse: Synapse;
+  system: System;
   selectedSynapse: number;
   setSystem: Dispatch<SetStateAction<System>>;
 }
 
-const SynapseBuilder = ({ synapse, selectedSynapse, setSystem }: Props) => {
+const SynapseBuilder = ({ system, selectedSynapse, setSystem }: Props) => {
   const setFrom = (from: number) => {
     setSystem((previousSystem) => ({
       ...previousSystem,
@@ -40,13 +39,16 @@ const SynapseBuilder = ({ synapse, selectedSynapse, setSystem }: Props) => {
     }));
   };
 
-  const { from, to, weight } = synapse;
+  const { from, to, weight } = system.synapses[selectedSynapse]!;
+
+  const fromLabel = system.neurons.find((neuron) => neuron.id === from)!.label;
+  const toLabel = system.neurons.find((neuron) => neuron.id === to)!.label;
 
   return (
     <div className="flex flex-col gap-3">
       <div>
         Currently editing synapse{" "}
-        <InlineMath math={`${from} \\rightarrow ${to}`} />:
+        <InlineMath math={`${fromLabel} \\rightarrow ${toLabel}`} />:
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">

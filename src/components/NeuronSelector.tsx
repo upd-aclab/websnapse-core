@@ -17,7 +17,7 @@ const NeuronSelector = ({
   return (
     <div className="w-full">
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="h-10 w-full rounded-md border border-solid border-lilac px-3 text-start">
+        <DropdownMenu.Trigger className="h-8 w-full rounded-md border border-solid border-lilac px-3 text-start">
           Choose a neuron to edit...
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
