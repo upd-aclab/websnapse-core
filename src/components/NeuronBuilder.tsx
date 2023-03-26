@@ -32,7 +32,7 @@ const NeuronBuilder = ({ neuron, selectedNeuron, setSystem }: Props) => {
 
   const { label, spikes } = neuron;
 
-  return neuron ? (
+  return (
     <div className="flex flex-col gap-3">
       <div>
         Currently editing neuron <InlineMath math={`${label}`} />:
@@ -61,8 +61,6 @@ const NeuronBuilder = ({ neuron, selectedNeuron, setSystem }: Props) => {
         </label>
       </div>
     </div>
-  ) : (
-    <div>No neuron selected!</div>
   );
 };
 

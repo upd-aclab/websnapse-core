@@ -82,7 +82,7 @@ const RuleBuilder = ({
 
   const { regex, consumed, produced, delay } = neuron.rules[selectedRule]!;
 
-  return neuron ? (
+  return (
     <div className="flex flex-col gap-3">
       <div>
         Currently editing rule #{selectedRule} in neuron{" "}
@@ -138,8 +138,6 @@ const RuleBuilder = ({
         </label>
       </div>
     </div>
-  ) : (
-    <div>No neuron selected!</div>
   );
 };
 
