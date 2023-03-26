@@ -11,7 +11,7 @@ interface Props {
 
 const System = ({ system }: Props) => {
   const neuronsJSX = system.neurons.map((neuron, index) => (
-    <Neuron key={index} data={neuron} />
+    <Neuron key={index} data={neuron} index={index} />
   ));
 
   const synapsesJSX = system.synapses.map((synapse, index) => (

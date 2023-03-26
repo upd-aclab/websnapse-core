@@ -7,9 +7,10 @@ import Rule from "./Rule";
 
 interface Props {
   data: NeuronType;
+  index: number;
 }
 
-const Neuron = ({ data }: Props) => {
+const Neuron = ({ data, index }: Props) => {
   const updateXArrow = useXarrow();
   const nodeRef = useRef(null);
 
@@ -25,7 +26,12 @@ const Neuron = ({ data }: Props) => {
       <div
         ref={nodeRef}
         id={`${id}`}
-        className="absolute top-[100px] left-[100px] flex w-fit items-center justify-center rounded-md border-2 border-solid border-black bg-white px-3 py-1 text-black hover:cursor-move"
+        className="flex w-fit items-center justify-center rounded-md border-2 border-solid border-black bg-white px-3 py-1 text-black hover:cursor-move"
+        style={{
+          position: "absolute",
+          top: 200 * (Math.floor(index / 2) + 1),
+          left: 300 * ((index % 2) + 1),
+        }}
       >
         <span className="absolute -left-6 -top-6">
           <InlineMath math={`${label}`} />
