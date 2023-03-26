@@ -17,7 +17,7 @@ const Home: NextPage = () => {
           <span className="text-lilac">Web</span>Snapse
           <span className="ml-2 text-2xl opacity-50">core</span>
         </h1>
-        <System system={system} />
+        <System system={system} setSystem={setSystem} />
       </main>
     </>
   );
