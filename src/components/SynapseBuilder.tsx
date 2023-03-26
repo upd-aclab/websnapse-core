@@ -54,23 +54,25 @@ const SynapseBuilder = ({ system, selectedSynapse, setSystem }: Props) => {
         <label className="flex items-center">
           <p className="w-36">From</p>
           <input
+            disabled
             type="number"
             value={from}
             placeholder="0"
             min={0}
             onChange={(e) => setFrom(parseInt(e.target.value))}
-            className="w-full rounded-md border border-solid border-lilac px-3 py-1"
+            className="w-full rounded-md border border-solid border-lilac px-3 py-1 hover:cursor-not-allowed"
           />
         </label>
         <label className="flex items-center">
           <p className="w-36">To</p>
           <input
+            disabled
             type="number"
             value={to}
             placeholder="0"
             min={0}
             onChange={(e) => setTo(parseInt(e.target.value))}
-            className="w-full rounded-md border border-solid border-lilac px-3 py-1"
+            className="w-full rounded-md border border-solid border-lilac px-3 py-1 hover:cursor-not-allowed"
           />
         </label>
         <label className="flex items-center">
