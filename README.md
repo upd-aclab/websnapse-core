@@ -3,7 +3,7 @@
 <br />
 
 <div align="center">
-	<img src="public/standards.png" width="20%" />
+	<img src="public/standards.png" width="60%" />
 	<p><i>What problem is this trying to solve?</i></p>
 	<p>(xkcd #927)</p>
 </div>
