@@ -39,13 +39,13 @@ The project is in a stage where emphasizing UI, UX, and DX becomes paramount, an
 
   - [page](https://websnapse.github.io/)
 
+- [WebSnapse + WebAssembly](https://github.com/lmgal/websnapse-v3), by Louie &
+
 - [WebSnapse + Numerical SN P systems (1)](https://github.com/CS199-Instrella-Vidad), by Reannu & John David
 
   - [landing page](https://snapse.website/)
   - [SN P page](https://snp.snapse.website/)
   - [NSN P page](https://nsnp.snapse.website/)
-
-- [WebSnapse + WebAssembly](https://github.com/lmgal/websnapse-v3), by Louie &
 
 - [WebSnapse + Numerical SN P systems (2)](https://github.com/numerical-websnapse), by Rey &
 
