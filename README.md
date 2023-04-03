@@ -29,10 +29,12 @@ The project is in a stage where emphasizing UI, UX, and DX becomes paramount, an
 
 - [WebSnapse v1](https://github.com/chinadupaya/WebSnapse), by Annysia & Anica
 
+  - [page](https://chinadupaya.github.io/WebSnapse/#/)
   - paper in page 264 of [ICMC 2021](https://konferencia.unideb.hu/sites/default/files/upload_documents/icmc-2021-proceedings-august-2021.pdf)
 
 - [WebSnapse v2](https://github.com/nccruel/websnapse_extended), by Nathaniel & Coleen
 
+  - [page](https://nccruel.github.io/websnapse_extended/#/)
   - paper in page 147 of [ACMC 2022](https://drive.google.com/file/d/1LYCBeGTFf3X5UOzJSSBcmqBgstJYAg5a/view)
 
 - [WebSnapse Reloaded](https://github.com/websnapse), by Mutya &
