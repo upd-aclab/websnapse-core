@@ -1,6 +1,6 @@
 {
-  "name": "automata",
-  "version": "0.1.0",
+  "name": "websnapse-core",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "build": "next build",
