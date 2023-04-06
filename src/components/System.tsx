@@ -22,12 +22,12 @@ const System = ({
       data={neuron}
       index={index}
       selected={neuron.id === selectedNeuron}
-			selectedRule={selectedRule}
+      selectedRule={selectedRule}
     />
   ));
 
   const synapsesJSX = system.synapses.map((synapse, index) => (
-    <Synapse key={index} data={synapse} />
+    <Synapse key={index} data={synapse} selected={index === selectedSynapse} />
   ));
 
   return (

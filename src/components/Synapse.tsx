@@ -4,9 +4,10 @@ import type SynapseType from "~/types/Synapse";
 
 interface Props {
   data: SynapseType;
+	selected: boolean;
 }
 
-const Synapse = ({ data }: Props) => {
+const Synapse = ({ data, selected }: Props) => {
   const { from, to, weight } = data;
 
   return (
@@ -14,7 +15,7 @@ const Synapse = ({ data }: Props) => {
       start={`${from}`}
       end={`${to}`}
       path="straight"
-      color="lightgray"
+      color={selected ? "lightblue" : "lightgray"}
       labels={
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
           <InlineMath math={`${weight}`} />
