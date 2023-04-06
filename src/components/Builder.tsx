@@ -18,8 +18,7 @@ const Builder = ({ system, setSystem }: Props) => {
   const [selectedSynapse, setSelectedSynapse] = useState(0);
 
   return (
-    <section className="w-[40%] border-r-2 border-solid border-lilac text-sm">
-      <h1 className="px-5 pt-3 text-3xl font-bold">Builder</h1>
+    <section className="text-sm">
       <div>
         <div className="flex flex-col gap-3 p-5">
           <NeuronSelector

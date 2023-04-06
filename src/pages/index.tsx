@@ -4,8 +4,10 @@ import { useState } from "react";
 import { DefaultSystem } from "~/types/System";
 import { type NextPage } from "next";
 import Builder from "~/components/Builder";
+import ModeSelector from "~/components/ModeSelector";
 
 const Home: NextPage = () => {
+  const [mode, setMode] = useState(0);
   const [system, setSystem] = useState(DefaultSystem);
 
   return (
@@ -19,7 +21,10 @@ const Home: NextPage = () => {
           <span className="ml-2 text-2xl opacity-50">core</span>
         </h1>
         <div className="flex h-full">
-          <Builder system={system} setSystem={setSystem} />
+          <div className="flex w-[40%]">
+            <Builder system={system} setSystem={setSystem} />
+            <ModeSelector mode={mode} setMode={setMode} />
+          </div>
           <System system={system} />
         </div>
       </main>
