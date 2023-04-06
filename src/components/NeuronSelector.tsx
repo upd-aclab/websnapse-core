@@ -27,7 +27,7 @@ const NeuronSelector = ({
           >
             <DropdownMenu.Arrow className="fill-lilac" />
             {neurons.map(({ id, label }, index) => (
-              <div key={index}>
+              <div key={index} className="flex">
                 {index > 0 && (
                   <DropdownMenu.Separator className="w-[1px] bg-lilac" />
                 )}

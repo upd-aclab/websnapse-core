@@ -22,7 +22,7 @@ const SynapseSelector = ({ synapses, setSelectedSynapse }: Props) => {
           >
             <DropdownMenu.Arrow className="fill-lilac" />
             {synapses.map(({ from, to }, index) => (
-              <div key={index}>
+              <div key={index} className="flex">
                 {index > 0 && (
                   <DropdownMenu.Separator className="w-[1px] bg-lilac" />
                 )}
