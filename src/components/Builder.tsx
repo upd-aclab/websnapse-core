@@ -10,13 +10,24 @@ import SynapseSelector from "./SynapseSelector";
 interface Props {
   system: System;
   setSystem: Dispatch<SetStateAction<System>>;
+  selectedNeuron: number;
+  selectedRule: number;
+  selectedSynapse: number;
+  setSelectedNeuron: Dispatch<SetStateAction<number>>;
+  setSelectedRule: Dispatch<SetStateAction<number>>;
+  setSelectedSynapse: Dispatch<SetStateAction<number>>;
 }
 
-const Builder = ({ system, setSystem }: Props) => {
-  const [selectedNeuron, setSelectedNeuron] = useState(1);
-  const [selectedRule, setSelectedRule] = useState(0);
-  const [selectedSynapse, setSelectedSynapse] = useState(0);
-
+const Builder = ({
+  system,
+  setSystem,
+  selectedNeuron,
+  selectedRule,
+  selectedSynapse,
+  setSelectedNeuron,
+  setSelectedRule,
+  setSelectedSynapse,
+}: Props) => {
   return (
     <section className="text-sm">
       <div>

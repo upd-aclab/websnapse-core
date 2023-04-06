@@ -10,6 +10,10 @@ const Home: NextPage = () => {
   const [mode, setMode] = useState(0);
   const [system, setSystem] = useState(DefaultSystem);
 
+  const [selectedNeuron, setSelectedNeuron] = useState(1);
+  const [selectedRule, setSelectedRule] = useState(0);
+  const [selectedSynapse, setSelectedSynapse] = useState(0);
+
   return (
     <>
       <Head>
@@ -22,10 +26,24 @@ const Home: NextPage = () => {
         </h1>
         <div className="flex h-full">
           <div className="flex w-[40%]">
-            <Builder system={system} setSystem={setSystem} />
+            <Builder
+              system={system}
+              setSystem={setSystem}
+              selectedNeuron={selectedNeuron}
+              selectedRule={selectedRule}
+              selectedSynapse={selectedSynapse}
+              setSelectedNeuron={setSelectedNeuron}
+              setSelectedRule={setSelectedRule}
+              setSelectedSynapse={setSelectedSynapse}
+            />
             <ModeSelector mode={mode} setMode={setMode} />
           </div>
-          <System system={system} />
+          <System
+            system={system}
+            selectedNeuron={selectedNeuron}
+            selectedRule={selectedRule}
+            selectedSynapse={selectedSynapse}
+          />
         </div>
       </main>
     </>

@@ -5,11 +5,25 @@ import Synapse from "./Synapse";
 
 interface Props {
   system: System;
+  selectedNeuron: number;
+  selectedRule: number;
+  selectedSynapse: number;
 }
 
-const System = ({ system }: Props) => {
+const System = ({
+  system,
+  selectedNeuron,
+  selectedRule,
+  selectedSynapse,
+}: Props) => {
   const neuronsJSX = system.neurons.map((neuron, index) => (
-    <Neuron key={index} data={neuron} index={index} />
+    <Neuron
+      key={index}
+      data={neuron}
+      index={index}
+      selected={neuron.id === selectedNeuron}
+			selectedRule={selectedRule}
+    />
   ));
 
   const synapsesJSX = system.synapses.map((synapse, index) => (

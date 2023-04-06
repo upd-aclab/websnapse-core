@@ -8,9 +8,11 @@ import Rule from "./Rule";
 interface Props {
   data: NeuronType;
   index: number;
+  selected: boolean;
+  selectedRule: number;
 }
 
-const Neuron = ({ data, index }: Props) => {
+const Neuron = ({ data, index, selected, selectedRule }: Props) => {
   const updateXArrow = useXarrow();
   const nodeRef = useRef(null);
 
@@ -26,7 +28,9 @@ const Neuron = ({ data, index }: Props) => {
       <div
         ref={nodeRef}
         id={`${id}`}
-        className="flex w-fit items-center justify-center rounded-md border-2 border-solid border-black bg-white px-3 py-1 text-black hover:cursor-move"
+        className={`${
+          selected ? "text-blue-500 border-blue-500" : "text-black border-black"
+        } flex w-fit items-center justify-center rounded-md border-2 border-solid bg-white px-3 py-1 hover:cursor-move`}
         style={{
           position: "absolute",
           top: 200 * (Math.floor(index / 2) + 1),
@@ -39,7 +43,11 @@ const Neuron = ({ data, index }: Props) => {
         <div className="flex flex-col items-center">
           <InlineMath math={`${spikes}`} />
           {rules.map((rule, index) => (
-            <Rule key={index} data={rule} />
+            <Rule
+              key={index}
+              data={rule}
+              selected={selected && selectedRule === index}
+            />
           ))}
         </div>
       </div>

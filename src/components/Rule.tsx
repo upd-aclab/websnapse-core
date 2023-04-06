@@ -4,10 +4,15 @@ import getRuleString from "~/utils/getMathString";
 
 interface Props {
   data: RuleType;
+  selected: boolean;
 }
 
-const Rule = ({ data }: Props) => {
-  return <InlineMath math={`${getRuleString(data)}`} />;
+const Rule = ({ data, selected }: Props) => {
+  return (
+    <span className={`${selected ? "text-blue-500" : "text-black"}`}>
+      <InlineMath math={`${getRuleString(data)}`} />
+    </span>
+  );
 };
 
 export default Rule;
