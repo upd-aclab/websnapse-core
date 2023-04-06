@@ -35,7 +35,7 @@ const Builder = ({ system, setSystem }: Props) => {
             setSystem={setSystem}
           />
         </div>
-        <div className="flex flex-col gap-3 border-t-2 border-solid border-lilac p-5">
+        <div className="flex flex-col gap-3 border-y-2 border-dashed border-lilac p-5">
           <RuleSelector
             neuron={system.neurons.find(
               (neuron) => neuron.id === selectedNeuron
@@ -51,7 +51,7 @@ const Builder = ({ system, setSystem }: Props) => {
             setSystem={setSystem}
           />
         </div>
-        <div className="flex flex-col gap-3 border-t-2 border-solid border-lilac p-5">
+        <div className="flex flex-col gap-3 p-5">
           <SynapseSelector
             synapses={system.synapses}
             setSelectedSynapse={setSelectedSynapse}
