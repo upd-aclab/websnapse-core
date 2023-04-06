@@ -35,7 +35,7 @@ const NeuronBuilder = ({ neuron, selectedNeuron, setSystem }: Props) => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        Currently editing neuron <InlineMath math={`${label}`} />:
+        Editing neuron <InlineMath math={`${label}`} />:
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">

@@ -47,7 +47,7 @@ const SynapseBuilder = ({ system, selectedSynapse, setSystem }: Props) => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        Currently editing synapse{" "}
+        Editing synapse{" "}
         <InlineMath math={`${fromLabel} \\rightarrow ${toLabel}`} />:
       </div>
       <div className="flex flex-col gap-3">
