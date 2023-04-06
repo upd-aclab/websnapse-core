@@ -27,12 +27,11 @@ const NeuronSelector = ({
           >
             <DropdownMenu.Arrow className="fill-lilac" />
             {neurons.map(({ id, label }, index) => (
-              <>
+              <div key={index}>
                 {index > 0 && (
                   <DropdownMenu.Separator className="w-[1px] bg-lilac" />
                 )}
                 <DropdownMenu.Item
-                  key={index}
                   className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
                   onClick={() => {
                     setSelectedNeuron(id);
@@ -41,7 +40,7 @@ const NeuronSelector = ({
                 >
                   <InlineMath math={`${label}`} />
                 </DropdownMenu.Item>
-              </>
+              </div>
             ))}
           </DropdownMenu.Content>
         </DropdownMenu.Portal>

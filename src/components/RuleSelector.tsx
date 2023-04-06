@@ -24,18 +24,17 @@ const RuleSelector = ({ neuron, setSelectedRule }: Props) => {
           >
             <DropdownMenu.Arrow className="fill-lilac" />
             {neuron.rules.map((rule, index) => (
-              <>
+              <div key={index}>
                 {index > 0 && (
                   <DropdownMenu.Separator className="h-[1px] bg-lilac" />
                 )}
                 <DropdownMenu.Item
-                  key={index}
                   className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
                   onClick={() => setSelectedRule(index)}
                 >
                   <InlineMath math={`${getRuleString(rule)}`} />
                 </DropdownMenu.Item>
-              </>
+              </div>
             ))}
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
