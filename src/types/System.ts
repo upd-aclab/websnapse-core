@@ -4,8 +4,8 @@ import type Synapse from "./Synapse";
 interface System {
   neurons: Neuron[];
   synapses: Synapse[];
-  inputNeuron: number;
-  outputNeuron: number;
+  inputNeurons: number[];
+  outputNeurons: number[];
 }
 
 const DefaultSystem: System = {
@@ -96,8 +96,8 @@ const DefaultSystem: System = {
       weight: 1,
     },
   ],
-  inputNeuron: 1,
-  outputNeuron: 1,
+  inputNeurons: [1],
+  outputNeurons: [1],
 };
 
 export default System;
