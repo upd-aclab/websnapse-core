@@ -81,7 +81,7 @@ const SynapseBuilder = ({ system, selectedSynapse, setSystem }: Props) => {
             type="number"
             value={weight}
             placeholder="0"
-            min={0}
+            min={1}
             onChange={(e) => setWeight(parseInt(e.target.value))}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1"
           />
