@@ -14,6 +14,13 @@ interface Props {
 const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
   const { regex, consumed, produced, delay } = rule;
 
+  const consumedOk =
+    consumed >= 1 &&
+    (isNaN(produced) || consumed >= produced) &&
+    !isNaN(consumed);
+  const producedOk = consumed >= produced && !isNaN(produced);
+  const delayOk = !isNaN(delay);
+
   return (
     <div className="flex flex-col gap-3">
       <div>
@@ -49,7 +56,9 @@ const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
                 Math.min(produced, parseInt(e.target.value))
               );
             }}
-            className="w-full rounded-md border border-solid border-lilac px-3 py-1"
+            className={`w-full rounded-md border-2 border-solid ${
+              consumedOk ? "border-green-600" : "border-red-600"
+            } px-3 py-1`}
           />
         </label>
         <label className="flex items-center">
@@ -61,7 +70,9 @@ const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
             max={consumed}
             min={0}
             onChange={(e) => handlers.setProduced(parseInt(e.target.value))}
-            className="w-full rounded-md border border-solid border-lilac px-3 py-1"
+            className={`w-full rounded-md border-2 border-solid ${
+              producedOk ? "border-green-600" : "border-red-600"
+            } px-3 py-1`}
           />
         </label>
         <label className="flex items-center">
@@ -72,7 +83,9 @@ const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
             placeholder="0"
             min={0}
             onChange={(e) => handlers.setDelay(parseInt(e.target.value))}
-            className="w-full rounded-md border border-solid border-lilac px-3 py-1"
+            className={`w-full rounded-md border-2 border-solid ${
+              delayOk ? "border-green-600" : "border-red-600"
+            } px-3 py-1`}
           />
         </label>
       </div>
