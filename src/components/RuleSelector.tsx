@@ -6,16 +6,16 @@ import getRuleString from "~/utils/getRuleString";
 
 interface Props {
   neuron: Neuron;
+  ruleString: string;
   handlers: Handlers;
 }
 
-const RuleSelector = ({ neuron, handlers }: Props) => {
+const RuleSelector = ({ neuron, ruleString, handlers }: Props) => {
   return neuron ? (
-    <div className="w-full">
+    <span>
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="h-8 w-full rounded-md border border-solid border-lilac px-3 text-start">
-          Choose a rule in neuron <InlineMath math={`${neuron.label}`} /> to
-          edit...
+        <DropdownMenu.Trigger className="h-8 rounded-md border border-solid border-lilac mx-1 px-2 text-start">
+          <InlineMath math={`${ruleString}`} />
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content
@@ -39,7 +39,7 @@ const RuleSelector = ({ neuron, handlers }: Props) => {
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
-    </div>
+    </span>
   ) : (
     <div>No neuron selected!</div>
   );

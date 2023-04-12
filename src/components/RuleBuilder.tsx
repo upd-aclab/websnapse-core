@@ -3,6 +3,7 @@ import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
 import type Rule from "~/types/Rule";
 import getRuleString from "~/utils/getRuleString";
+import RuleSelector from "./RuleSelector";
 
 interface Props {
   neuron: Neuron;
@@ -16,8 +17,13 @@ const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        Editing rule <InlineMath math={`${getRuleString(rule)}`} /> in{" "}
-        <InlineMath math={`${neuron.label}`} />:
+        Editing rule{" "}
+        <RuleSelector
+          neuron={neuron}
+          ruleString={getRuleString(rule)}
+          handlers={handlers}
+        />{" "}
+        in <InlineMath math={`${neuron.label}`} />:
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">
