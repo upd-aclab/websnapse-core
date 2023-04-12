@@ -1,4 +1,3 @@
-import { InlineMath } from "react-katex";
 import type Handlers from "~/types/Handlers";
 import type Synapse from "~/types/Synapse";
 import SynapseSelector from "./SynapseSelector";
