@@ -5,6 +5,7 @@ interface Neuron {
   label: string;
   spikes: number;
   rules: Rule[];
+  downtime: number;
 }
 
 export default Neuron;

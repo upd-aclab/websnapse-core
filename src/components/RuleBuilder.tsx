@@ -23,7 +23,7 @@ const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
           ruleString={getRuleString(rule)}
           handlers={handlers}
         />{" "}
-        in <InlineMath math={`${neuron.label}`} />:
+        in <InlineMath math={`${neuron.label}`} />
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">

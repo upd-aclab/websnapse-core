@@ -16,7 +16,7 @@ const Neuron = ({ data, index, selected, selectedRule }: Props) => {
   const updateXArrow = useXarrow();
   const nodeRef = useRef(null);
 
-  const { id, spikes, label, rules } = data;
+  const { id, spikes, label, rules, downtime } = data;
 
   return (
     <Draggable
@@ -49,6 +49,7 @@ const Neuron = ({ data, index, selected, selectedRule }: Props) => {
               selected={selected && selectedRule === index}
             />
           ))}
+					<InlineMath math={`${downtime}`} />
         </div>
       </div>
     </Draggable>

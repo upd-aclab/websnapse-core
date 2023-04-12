@@ -28,6 +28,7 @@ const DefaultSystem: System = {
           delay: 1,
         },
       ],
+      downtime: 0,
     },
     {
       id: 2,
@@ -41,6 +42,7 @@ const DefaultSystem: System = {
           delay: 0,
         },
       ],
+      downtime: 0,
     },
     {
       id: 3,
@@ -54,6 +56,7 @@ const DefaultSystem: System = {
           delay: 0,
         },
       ],
+      downtime: 0,
     },
     {
       id: 4,
@@ -67,6 +70,7 @@ const DefaultSystem: System = {
           delay: 0,
         },
       ],
+      downtime: 0,
     },
   ],
   synapses: [
