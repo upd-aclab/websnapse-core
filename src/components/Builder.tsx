@@ -1,10 +1,7 @@
 import type System from "~/types/System";
 import NeuronBuilder from "./NeuronBuilder";
-import NeuronSelector from "./NeuronSelector";
 import RuleBuilder from "./RuleBuilder";
-import RuleSelector from "./RuleSelector";
 import SynapseBuilder from "./SynapseBuilder";
-import SynapseSelector from "./SynapseSelector";
 import type Handlers from "~/types/Handlers";
 import type Selected from "~/types/Selected";
 
@@ -32,7 +29,7 @@ const Builder = ({ system, handlers, selected }: Props) => {
   )!.label;
 
   return (
-    <section className="text-sm">
+    <section className="text-sm w-full">
       <div>
         <div className="flex flex-col gap-3 p-5">
           <NeuronBuilder
@@ -46,8 +43,8 @@ const Builder = ({ system, handlers, selected }: Props) => {
         </div>
         <div className="flex flex-col gap-3 p-5">
           <SynapseBuilder
-						neurons={system.neurons}
-						synapses={system.synapses}
+            neurons={system.neurons}
+            synapses={system.synapses}
             synapse={synapse}
             fromLabel={fromLabel}
             toLabel={toLabel}
