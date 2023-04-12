@@ -1,6 +1,6 @@
 import Head from "next/head";
 import System from "~/components/System";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DefaultSystem } from "~/types/System";
 import { type NextPage } from "next";
 import Builder from "~/components/Builder";
@@ -8,6 +8,8 @@ import ModeSelector from "~/components/ModeSelector";
 import type Neuron from "~/types/Neuron";
 import type Handlers from "~/types/Handlers";
 import type Selected from "~/types/Selected";
+import matchesRegex from "~/utils/matchesRegex";
+import Simulator from "~/components/Simulator";
 
 const Home: NextPage = () => {
   const [mode, setMode] = useState(0);
@@ -17,6 +19,18 @@ const Home: NextPage = () => {
     rule: 0,
     synapse: 0,
   });
+  const [time, setTime] = useState(0);
+  const [simulating, setSimulating] = useState(false);
+
+  useEffect(() => {
+    if (simulating) {
+      const intervalId = setInterval(
+        () => setTime((previousTime) => previousTime + 1),
+        1000
+      );
+      return () => clearInterval(intervalId);
+    }
+  }, [simulating]);
 
   const addNeuron = () => {
     const newNeuron: Neuron = {
@@ -31,6 +45,7 @@ const Home: NextPage = () => {
           delay: 0,
         },
       ],
+      downtime: 0,
     };
     setSystem((previousSystem) => ({
       ...previousSystem,
@@ -173,6 +188,32 @@ const Home: NextPage = () => {
     }));
   };
 
+  const simulate = () => {
+    setSystem((previousSystem) => {
+      const copy = previousSystem;
+
+      const n = copy.neurons.length;
+
+      const willFire = Array(n)
+        .fill(0)
+        .map(() => Array<number>(0));
+
+      copy.neurons.forEach((neuron, neuronIndex) =>
+        neuron.rules.forEach((_, ruleIndex) => {
+          if (matchesRegex(neuron, ruleIndex)) {
+            willFire[neuronIndex]?.push(ruleIndex);
+          }
+        })
+      );
+
+      return copy;
+    });
+  };
+
+  const toggleSimulating = () => {
+    setSimulating((previousSimulating) => !previousSimulating);
+  };
+
   const handlers: Handlers = {
     addNeuron,
     setLabel,
@@ -189,6 +230,16 @@ const Home: NextPage = () => {
     setSynapse,
   };
 
+  const ModeComponents = [
+    <Builder key={0} system={system} handlers={handlers} selected={selected} />,
+    <Simulator
+      key={1}
+      system={system}
+      time={time}
+      toggleSimulating={toggleSimulating}
+    />,
+  ];
+
   return (
     <>
       <Head>
@@ -201,7 +252,7 @@ const Home: NextPage = () => {
         </h1>
         <div className="flex h-full">
           <div className="flex w-[40%]">
-            <Builder system={system} handlers={handlers} selected={selected} />
+            {ModeComponents[mode]}
             <ModeSelector mode={mode} setMode={setMode} />
           </div>
           <System system={system} selected={selected} />
