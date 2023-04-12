@@ -49,7 +49,7 @@ const Neuron = ({ data, index, selected, selectedRule }: Props) => {
               selected={selected && selectedRule === index}
             />
           ))}
-					<InlineMath math={`${downtime}`} />
+          <InlineMath math={`${downtime}`} />
         </div>
       </div>
     </Draggable>

@@ -1,4 +1,3 @@
-import { InlineMath } from "react-katex";
 import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
 import NeuronSelector from "./NeuronSelector";
@@ -15,7 +14,8 @@ const NeuronBuilder = ({ neurons, neuron, handlers }: Props) => {
   return (
     <div className="flex flex-col gap-3">
       <div>
-        Editing neuron <NeuronSelector neurons={neurons} label={label} handlers={handlers} />
+        Editing neuron{" "}
+        <NeuronSelector neurons={neurons} label={label} handlers={handlers} />
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">

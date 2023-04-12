@@ -4,7 +4,7 @@ import type SynapseType from "~/types/Synapse";
 
 interface Props {
   data: SynapseType;
-	selected: boolean;
+  selected: boolean;
 }
 
 const Synapse = ({ data, selected }: Props) => {
