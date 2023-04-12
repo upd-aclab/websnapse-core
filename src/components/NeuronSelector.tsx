@@ -5,15 +5,16 @@ import type Neuron from "~/types/Neuron";
 
 interface Props {
   neurons: Neuron[];
+  label: string;
   handlers: Handlers;
 }
 
-const NeuronSelector = ({ neurons, handlers }: Props) => {
+const NeuronSelector = ({ neurons, label, handlers }: Props) => {
   return (
-    <div className="w-full">
+    <span>
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="h-8 w-full rounded-md border border-solid border-lilac px-3 text-start">
-          Choose a neuron to edit...
+        <DropdownMenu.Trigger className="h-8 rounded-md border border-solid border-lilac mx-1 px-2">
+          <InlineMath math={`${label}`} />
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content
@@ -51,7 +52,7 @@ const NeuronSelector = ({ neurons, handlers }: Props) => {
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
-    </div>
+    </span>
   );
 };
 

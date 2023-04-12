@@ -35,8 +35,7 @@ const Builder = ({ system, handlers, selected }: Props) => {
     <section className="text-sm">
       <div>
         <div className="flex flex-col gap-3 p-5">
-          <NeuronSelector neurons={system.neurons} handlers={handlers} />
-          <NeuronBuilder neuron={neuron} handlers={handlers} />
+          <NeuronBuilder neurons={system.neurons} neuron={neuron} handlers={handlers} />
         </div>
         <div className="flex flex-col gap-3 border-y-2 border-dashed border-lilac p-5">
           <RuleSelector neuron={neuron} handlers={handlers} />
