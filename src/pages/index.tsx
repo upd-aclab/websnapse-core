@@ -7,14 +7,16 @@ import Builder from "~/components/Builder";
 import ModeSelector from "~/components/ModeSelector";
 import type Neuron from "~/types/Neuron";
 import type Handlers from "~/types/Handlers";
+import type Selected from "~/types/Selected";
 
 const Home: NextPage = () => {
   const [mode, setMode] = useState(0);
   const [system, setSystem] = useState(DefaultSystem);
-
-  const [selectedNeuron, setSelectedNeuron] = useState(1);
-  const [selectedRule, setSelectedRule] = useState(0);
-  const [selectedSynapse, setSelectedSynapse] = useState(0);
+  const [selected, setSelected] = useState<Selected>({
+    neuron: 1,
+    rule: 0,
+    synapse: 0,
+  });
 
   const addNeuron = () => {
     const newNeuron: Neuron = {
@@ -41,7 +43,7 @@ const Home: NextPage = () => {
       ...previousSystem,
       neurons: previousSystem.neurons.map((neuron) => ({
         ...neuron,
-        label: neuron.id === selectedNeuron ? label : neuron.label,
+        label: neuron.id === selected.neuron ? label : neuron.label,
       })),
     }));
   };
@@ -51,7 +53,7 @@ const Home: NextPage = () => {
       ...previousSystem,
       neurons: previousSystem.neurons.map((neuron) => ({
         ...neuron,
-        spikes: neuron.id === selectedNeuron ? spikes : neuron.spikes,
+        spikes: neuron.id === selected.neuron ? spikes : neuron.spikes,
       })),
     }));
   };
@@ -64,7 +66,7 @@ const Home: NextPage = () => {
         rules: neuron.rules.map((rule, index) => ({
           ...rule,
           regex:
-            neuron.id === selectedNeuron && index === selectedRule
+            neuron.id === selected.neuron && index === selected.rule
               ? regex
               : rule.regex,
         })),
@@ -80,7 +82,7 @@ const Home: NextPage = () => {
         rules: neuron.rules.map((rule, index) => ({
           ...rule,
           consumed:
-            neuron.id === selectedNeuron && index === selectedRule
+            neuron.id === selected.neuron && index === selected.rule
               ? consumed
               : rule.consumed,
         })),
@@ -96,7 +98,7 @@ const Home: NextPage = () => {
         rules: neuron.rules.map((rule, index) => ({
           ...rule,
           produced:
-            neuron.id === selectedNeuron && index === selectedRule
+            neuron.id === selected.neuron && index === selected.rule
               ? produced
               : rule.produced,
         })),
@@ -112,7 +114,7 @@ const Home: NextPage = () => {
         rules: neuron.rules.map((rule, index) => ({
           ...rule,
           delay:
-            neuron.id === selectedNeuron && index === selectedRule
+            neuron.id === selected.neuron && index === selected.rule
               ? delay
               : rule.delay,
         })),
@@ -125,7 +127,7 @@ const Home: NextPage = () => {
       ...previousSystem,
       synapses: previousSystem.synapses.map((synapse, index) => ({
         ...synapse,
-        from: index === selectedSynapse ? from : synapse.from,
+        from: index === selected.synapse ? from : synapse.from,
       })),
     }));
   };
@@ -135,7 +137,7 @@ const Home: NextPage = () => {
       ...previousSystem,
       synapses: previousSystem.synapses.map((synapse, index) => ({
         ...synapse,
-        to: index === selectedSynapse ? to : synapse.to,
+        to: index === selected.synapse ? to : synapse.to,
       })),
     }));
   };
@@ -145,15 +147,33 @@ const Home: NextPage = () => {
       ...previousSystem,
       synapses: previousSystem.synapses.map((synapse, index) => ({
         ...synapse,
-        weight: index === selectedSynapse ? weight : synapse.weight,
+        weight: index === selected.synapse ? weight : synapse.weight,
       })),
     }));
   };
 
+  const setNeuron = (id: number) => {
+    setSelected((previousSelected) => ({
+      ...previousSelected,
+      neuron: id,
+    }));
+  };
+
+  const setRule = (index: number) => {
+    setSelected((previousSelected) => ({
+      ...previousSelected,
+      rule: index,
+    }));
+  };
+
+  const setSynapse = (index: number) => {
+    setSelected((previousSelected) => ({
+      ...previousSelected,
+      synapse: index,
+    }));
+  };
+
   const handlers: Handlers = {
-    setSelectedNeuron,
-    setSelectedRule,
-    setSelectedSynapse,
     addNeuron,
     setLabel,
     setSpikes,
@@ -161,9 +181,12 @@ const Home: NextPage = () => {
     setConsumed,
     setProduced,
     setDelay,
-		setFrom,
-		setTo,
-		setWeight,
+    setFrom,
+    setTo,
+    setWeight,
+    setNeuron,
+    setRule,
+    setSynapse,
   };
 
   return (
@@ -178,21 +201,10 @@ const Home: NextPage = () => {
         </h1>
         <div className="flex h-full">
           <div className="flex w-[40%]">
-            <Builder
-              system={system}
-              handlers={handlers}
-              selectedNeuron={selectedNeuron}
-              selectedRule={selectedRule}
-              selectedSynapse={selectedSynapse}
-            />
+            <Builder system={system} handlers={handlers} selected={selected} />
             <ModeSelector mode={mode} setMode={setMode} />
           </div>
-          <System
-            system={system}
-            selectedNeuron={selectedNeuron}
-            selectedRule={selectedRule}
-            selectedSynapse={selectedSynapse}
-          />
+          <System system={system} selected={selected} />
         </div>
       </main>
     </>

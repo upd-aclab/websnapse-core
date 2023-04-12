@@ -2,7 +2,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { InlineMath } from "react-katex";
 import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
-import getRuleString from "~/utils/getMathString";
+import getRuleString from "~/utils/getRuleString";
 
 interface Props {
   neuron: Neuron;
@@ -30,7 +30,7 @@ const RuleSelector = ({ neuron, handlers }: Props) => {
                 )}
                 <DropdownMenu.Item
                   className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
-                  onClick={() => handlers.setSelectedRule(index)}
+                  onClick={() => handlers.setRule(index)}
                 >
                   <InlineMath math={`${getRuleString(rule)}`} />
                 </DropdownMenu.Item>

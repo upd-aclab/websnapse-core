@@ -29,8 +29,8 @@ const NeuronSelector = ({ neurons, handlers }: Props) => {
                 <DropdownMenu.Item
                   className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
                   onClick={() => {
-                    handlers.setSelectedNeuron(id);
-                    handlers.setSelectedRule(0);
+                    handlers.setNeuron(id);
+                    handlers.setRule(0);
                   }}
                 >
                   <InlineMath math={`${label}`} />
@@ -42,8 +42,8 @@ const NeuronSelector = ({ neurons, handlers }: Props) => {
               className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
               onClick={() => {
                 handlers.addNeuron();
-                handlers.setSelectedNeuron(neurons.length + 1);
-                handlers.setSelectedRule(0);
+                handlers.setNeuron(neurons.length + 1);
+                handlers.setRule(0);
               }}
             >
               +

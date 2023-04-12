@@ -6,23 +6,30 @@ import RuleSelector from "./RuleSelector";
 import SynapseBuilder from "./SynapseBuilder";
 import SynapseSelector from "./SynapseSelector";
 import type Handlers from "~/types/Handlers";
+import type Selected from "~/types/Selected";
 
 interface Props {
   system: System;
   handlers: Handlers;
-  selectedNeuron: number;
-  selectedRule: number;
-  selectedSynapse: number;
+  selected: Selected;
 }
 
-const Builder = ({
-  system,
-  handlers,
-  selectedNeuron,
-  selectedRule,
-  selectedSynapse,
-}: Props) => {
-  const neuron = system.neurons.find((neuron) => neuron.id === selectedNeuron)!;
+const Builder = ({ system, handlers, selected }: Props) => {
+  const neuron = system.neurons.find(
+    (neuron) => neuron.id === selected.neuron
+  )!;
+
+  const rule = neuron.rules[selected.rule]!;
+
+  const synapse = system.synapses[selected.synapse]!;
+
+  const fromLabel = system.neurons.find(
+    (neuron) => neuron.id === synapse.from
+  )!.label;
+
+  const toLabel = system.neurons.find(
+    (neuron) => neuron.id === synapse.to
+  )!.label;
 
   return (
     <section className="text-sm">
@@ -33,18 +40,14 @@ const Builder = ({
         </div>
         <div className="flex flex-col gap-3 border-y-2 border-dashed border-lilac p-5">
           <RuleSelector neuron={neuron} handlers={handlers} />
-          <RuleBuilder
-            neuron={neuron}
-            handlers={handlers}
-            selectedNeuron={selectedNeuron}
-            selectedRule={selectedRule}
-          />
+          <RuleBuilder neuron={neuron} rule={rule} handlers={handlers} />
         </div>
         <div className="flex flex-col gap-3 p-5">
           <SynapseSelector synapses={system.synapses} handlers={handlers} />
           <SynapseBuilder
-            system={system}
-            selectedSynapse={selectedSynapse}
+            synapse={synapse}
+            fromLabel={fromLabel}
+            toLabel={toLabel}
             handlers={handlers}
           />
         </div>

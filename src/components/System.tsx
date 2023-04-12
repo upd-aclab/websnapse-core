@@ -2,32 +2,26 @@ import { Xwrapper } from "react-xarrows";
 import Neuron from "./Neuron";
 import System from "~/types/System";
 import Synapse from "./Synapse";
+import type Selected from "~/types/Selected";
 
 interface Props {
   system: System;
-  selectedNeuron: number;
-  selectedRule: number;
-  selectedSynapse: number;
+  selected: Selected;
 }
 
-const System = ({
-  system,
-  selectedNeuron,
-  selectedRule,
-  selectedSynapse,
-}: Props) => {
+const System = ({ system, selected }: Props) => {
   const neuronsJSX = system.neurons.map((neuron, index) => (
     <Neuron
       key={index}
       data={neuron}
       index={index}
-      selected={neuron.id === selectedNeuron}
-      selectedRule={selectedRule}
+      selected={neuron.id === selected.neuron}
+      selectedRule={selected.rule}
     />
   ));
 
   const synapsesJSX = system.synapses.map((synapse, index) => (
-    <Synapse key={index} data={synapse} selected={index === selectedSynapse} />
+    <Synapse key={index} data={synapse} selected={index === selected.synapse} />
   ));
 
   return (

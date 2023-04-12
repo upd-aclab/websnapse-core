@@ -1,6 +1,6 @@
 import { InlineMath } from "react-katex";
 import type RuleType from "~/types/Rule";
-import getRuleString from "~/utils/getMathString";
+import getRuleString from "~/utils/getRuleString";
 
 interface Props {
   data: RuleType;

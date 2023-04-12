@@ -1,18 +1,16 @@
 import { InlineMath } from "react-katex";
 import type Handlers from "~/types/Handlers";
-import type System from "~/types/System";
+import type Synapse from "~/types/Synapse";
 
 interface Props {
-  system: System;
-  selectedSynapse: number;
+  synapse: Synapse;
+  fromLabel: string;
+  toLabel: string;
   handlers: Handlers;
 }
 
-const SynapseBuilder = ({ system, selectedSynapse, handlers }: Props) => {
-  const { from, to, weight } = system.synapses[selectedSynapse]!;
-
-  const fromLabel = system.neurons.find((neuron) => neuron.id === from)!.label;
-  const toLabel = system.neurons.find((neuron) => neuron.id === to)!.label;
+const SynapseBuilder = ({ synapse, fromLabel, toLabel, handlers }: Props) => {
+  const { from, to, weight } = synapse;
 
   return (
     <div className="flex flex-col gap-3">

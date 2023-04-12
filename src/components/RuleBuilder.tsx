@@ -1,21 +1,22 @@
 import { InlineMath } from "react-katex";
 import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
+import type Rule from "~/types/Rule";
+import getRuleString from "~/utils/getRuleString";
 
 interface Props {
   neuron: Neuron;
+  rule: Rule;
   handlers: Handlers;
-  selectedNeuron: number;
-  selectedRule: number;
 }
 
-const RuleBuilder = ({ neuron, handlers, selectedRule }: Props) => {
-  const { regex, consumed, produced, delay } = neuron.rules[selectedRule]!;
+const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
+  const { regex, consumed, produced, delay } = rule;
 
   return (
     <div className="flex flex-col gap-3">
       <div>
-        Editing rule #{selectedRule} (0-indexed) in neuron{" "}
+        Editing rule <InlineMath math={`${getRuleString(rule)}`} /> in{" "}
         <InlineMath math={`${neuron.label}`} />:
       </div>
       <div className="flex flex-col gap-3">
