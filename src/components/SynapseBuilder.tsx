@@ -1,44 +1,14 @@
-import { type Dispatch, type SetStateAction } from "react";
 import { InlineMath } from "react-katex";
+import type Handlers from "~/types/Handlers";
 import type System from "~/types/System";
 
 interface Props {
   system: System;
   selectedSynapse: number;
-  setSystem: Dispatch<SetStateAction<System>>;
+  handlers: Handlers;
 }
 
-const SynapseBuilder = ({ system, selectedSynapse, setSystem }: Props) => {
-  const setFrom = (from: number) => {
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      synapses: previousSystem.synapses.map((synapse, index) => ({
-        ...synapse,
-        from: index === selectedSynapse ? from : synapse.from,
-      })),
-    }));
-  };
-
-  const setTo = (to: number) => {
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      synapses: previousSystem.synapses.map((synapse, index) => ({
-        ...synapse,
-        to: index === selectedSynapse ? to : synapse.to,
-      })),
-    }));
-  };
-
-  const setWeight = (weight: number) => {
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      synapses: previousSystem.synapses.map((synapse, index) => ({
-        ...synapse,
-        weight: index === selectedSynapse ? weight : synapse.weight,
-      })),
-    }));
-  };
-
+const SynapseBuilder = ({ system, selectedSynapse, handlers }: Props) => {
   const { from, to, weight } = system.synapses[selectedSynapse]!;
 
   const fromLabel = system.neurons.find((neuron) => neuron.id === from)!.label;
@@ -59,7 +29,7 @@ const SynapseBuilder = ({ system, selectedSynapse, setSystem }: Props) => {
             value={from}
             placeholder="0"
             min={0}
-            onChange={(e) => setFrom(parseInt(e.target.value))}
+            onChange={(e) => handlers.setFrom(parseInt(e.target.value))}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1 hover:cursor-not-allowed"
           />
         </label>
@@ -71,7 +41,7 @@ const SynapseBuilder = ({ system, selectedSynapse, setSystem }: Props) => {
             value={to}
             placeholder="0"
             min={0}
-            onChange={(e) => setTo(parseInt(e.target.value))}
+            onChange={(e) => handlers.setTo(parseInt(e.target.value))}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1 hover:cursor-not-allowed"
           />
         </label>
@@ -82,7 +52,7 @@ const SynapseBuilder = ({ system, selectedSynapse, setSystem }: Props) => {
             value={weight}
             placeholder="0"
             min={1}
-            onChange={(e) => setWeight(parseInt(e.target.value))}
+            onChange={(e) => handlers.setWeight(parseInt(e.target.value))}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1"
           />
         </label>

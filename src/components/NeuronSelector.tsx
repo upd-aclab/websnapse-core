@@ -1,42 +1,14 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { type Dispatch, type SetStateAction } from "react";
 import { InlineMath } from "react-katex";
+import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
-import type System from "~/types/System";
 
 interface Props {
   neurons: Neuron[];
-  setSelectedNeuron: Dispatch<SetStateAction<number>>;
-  setSelectedRule: Dispatch<SetStateAction<number>>;
-  setSystem: Dispatch<SetStateAction<System>>;
+  handlers: Handlers;
 }
 
-const NeuronSelector = ({
-  neurons,
-  setSelectedNeuron,
-  setSelectedRule,
-  setSystem,
-}: Props) => {
-  const addNeuron = () => {
-    const newNeuron: Neuron = {
-      id: neurons.length + 1,
-      label: String.raw`\verb|<label>|`,
-      spikes: 0,
-      rules: [
-        {
-          regex: "a",
-          consumed: 1,
-          produced: 1,
-          delay: 0,
-        },
-      ],
-    };
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      neurons: [...previousSystem.neurons, newNeuron],
-    }));
-  };
-
+const NeuronSelector = ({ neurons, handlers }: Props) => {
   return (
     <div className="w-full">
       <DropdownMenu.Root>
@@ -57,8 +29,8 @@ const NeuronSelector = ({
                 <DropdownMenu.Item
                   className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
                   onClick={() => {
-                    setSelectedNeuron(id);
-                    setSelectedRule(0);
+                    handlers.setSelectedNeuron(id);
+                    handlers.setSelectedRule(0);
                   }}
                 >
                   <InlineMath math={`${label}`} />
@@ -69,9 +41,9 @@ const NeuronSelector = ({
             <DropdownMenu.Item
               className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
               onClick={() => {
-                addNeuron();
-                setSelectedNeuron(neurons.length + 1);
-                setSelectedRule(0);
+                handlers.addNeuron();
+                handlers.setSelectedNeuron(neurons.length + 1);
+                handlers.setSelectedRule(0);
               }}
             >
               +

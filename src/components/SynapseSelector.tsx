@@ -1,14 +1,14 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { type Dispatch, type SetStateAction } from "react";
 import { InlineMath } from "react-katex";
+import type Handlers from "~/types/Handlers";
 import type Synapse from "~/types/Synapse";
 
 interface Props {
   synapses: Synapse[];
-  setSelectedSynapse: Dispatch<SetStateAction<number>>;
+  handlers: Handlers;
 }
 
-const SynapseSelector = ({ synapses, setSelectedSynapse }: Props) => {
+const SynapseSelector = ({ synapses, handlers }: Props) => {
   return (
     <div className="w-full">
       <DropdownMenu.Root>
@@ -28,7 +28,7 @@ const SynapseSelector = ({ synapses, setSelectedSynapse }: Props) => {
                 )}
                 <DropdownMenu.Item
                   className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
-                  onClick={() => setSelectedSynapse(index)}
+                  onClick={() => handlers.setSelectedSynapse(index)}
                 >
                   <InlineMath math={`${from} \\rightarrow ${to}`} />
                 </DropdownMenu.Item>

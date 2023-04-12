@@ -1,35 +1,13 @@
-import { type Dispatch, type SetStateAction } from "react";
 import { InlineMath } from "react-katex";
+import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
-import type System from "~/types/System";
 
 interface Props {
   neuron: Neuron;
-  selectedNeuron: number;
-  setSystem: Dispatch<SetStateAction<System>>;
+  handlers: Handlers;
 }
 
-const NeuronBuilder = ({ neuron, selectedNeuron, setSystem }: Props) => {
-  const setLabel = (label: string) => {
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      neurons: previousSystem.neurons.map((neuron) => ({
-        ...neuron,
-        label: neuron.id === selectedNeuron ? label : neuron.label,
-      })),
-    }));
-  };
-
-  const setSpikes = (spikes: number) => {
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      neurons: previousSystem.neurons.map((neuron) => ({
-        ...neuron,
-        spikes: neuron.id === selectedNeuron ? spikes : neuron.spikes,
-      })),
-    }));
-  };
-
+const NeuronBuilder = ({ neuron, handlers }: Props) => {
   const { label, spikes } = neuron;
 
   return (
@@ -44,7 +22,7 @@ const NeuronBuilder = ({ neuron, selectedNeuron, setSystem }: Props) => {
             type="text"
             value={label}
             placeholder="n_{1}"
-            onChange={(e) => setLabel(e.target.value)}
+            onChange={(e) => handlers.setLabel(e.target.value)}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1"
           />
         </label>
@@ -55,7 +33,7 @@ const NeuronBuilder = ({ neuron, selectedNeuron, setSystem }: Props) => {
             value={spikes}
             placeholder="0"
             min={0}
-            onChange={(e) => setSpikes(parseInt(e.target.value))}
+            onChange={(e) => handlers.setSpikes(parseInt(e.target.value))}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1"
           />
         </label>

@@ -1,85 +1,15 @@
-import { type Dispatch, type SetStateAction } from "react";
 import { InlineMath } from "react-katex";
+import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
-import type System from "~/types/System";
 
 interface Props {
   neuron: Neuron;
+  handlers: Handlers;
   selectedNeuron: number;
   selectedRule: number;
-  setSystem: Dispatch<SetStateAction<System>>;
 }
 
-const RuleBuilder = ({
-  neuron,
-  selectedNeuron,
-  selectedRule,
-  setSystem,
-}: Props) => {
-  const setRegex = (regex: string) => {
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      neurons: previousSystem.neurons.map((neuron) => ({
-        ...neuron,
-        rules: neuron.rules.map((rule, index) => ({
-          ...rule,
-          regex:
-            neuron.id === selectedNeuron && index === selectedRule
-              ? regex
-              : rule.regex,
-        })),
-      })),
-    }));
-  };
-
-  const setConsumed = (consumed: number) => {
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      neurons: previousSystem.neurons.map((neuron) => ({
-        ...neuron,
-        rules: neuron.rules.map((rule, index) => ({
-          ...rule,
-          consumed:
-            neuron.id === selectedNeuron && index === selectedRule
-              ? consumed
-              : rule.consumed,
-        })),
-      })),
-    }));
-  };
-
-  const setProduced = (produced: number) => {
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      neurons: previousSystem.neurons.map((neuron) => ({
-        ...neuron,
-        rules: neuron.rules.map((rule, index) => ({
-          ...rule,
-          produced:
-            neuron.id === selectedNeuron && index === selectedRule
-              ? produced
-              : rule.produced,
-        })),
-      })),
-    }));
-  };
-
-  const setDelay = (delay: number) => {
-    setSystem((previousSystem) => ({
-      ...previousSystem,
-      neurons: previousSystem.neurons.map((neuron) => ({
-        ...neuron,
-        rules: neuron.rules.map((rule, index) => ({
-          ...rule,
-          delay:
-            neuron.id === selectedNeuron && index === selectedRule
-              ? delay
-              : rule.delay,
-        })),
-      })),
-    }));
-  };
-
+const RuleBuilder = ({ neuron, handlers, selectedRule }: Props) => {
   const { regex, consumed, produced, delay } = neuron.rules[selectedRule]!;
 
   return (
@@ -95,7 +25,7 @@ const RuleBuilder = ({
             type="text"
             value={regex}
             placeholder="a^{2}"
-            onChange={(e) => setRegex(e.target.value)}
+            onChange={(e) => handlers.setRegex(e.target.value)}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1"
           />
         </label>
@@ -107,8 +37,10 @@ const RuleBuilder = ({
             placeholder="0"
             min={1}
             onChange={(e) => {
-              setConsumed(parseInt(e.target.value));
-              setProduced(Math.min(produced, parseInt(e.target.value)));
+              handlers.setConsumed(parseInt(e.target.value));
+              handlers.setProduced(
+                Math.min(produced, parseInt(e.target.value))
+              );
             }}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1"
           />
@@ -121,7 +53,7 @@ const RuleBuilder = ({
             placeholder="0"
             max={consumed}
             min={0}
-            onChange={(e) => setProduced(parseInt(e.target.value))}
+            onChange={(e) => handlers.setProduced(parseInt(e.target.value))}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1"
           />
         </label>
@@ -132,7 +64,7 @@ const RuleBuilder = ({
             value={delay}
             placeholder="0"
             min={0}
-            onChange={(e) => setDelay(parseInt(e.target.value))}
+            onChange={(e) => handlers.setDelay(parseInt(e.target.value))}
             className="w-full rounded-md border border-solid border-lilac px-3 py-1"
           />
         </label>
