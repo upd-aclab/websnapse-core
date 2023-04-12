@@ -45,8 +45,9 @@ const Builder = ({ system, handlers, selected }: Props) => {
           <RuleBuilder neuron={neuron} rule={rule} handlers={handlers} />
         </div>
         <div className="flex flex-col gap-3 p-5">
-          <SynapseSelector synapses={system.synapses} handlers={handlers} />
           <SynapseBuilder
+						neurons={system.neurons}
+						synapses={system.synapses}
             synapse={synapse}
             fromLabel={fromLabel}
             toLabel={toLabel}

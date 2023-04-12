@@ -1,22 +1,38 @@
 import { InlineMath } from "react-katex";
 import type Handlers from "~/types/Handlers";
 import type Synapse from "~/types/Synapse";
+import SynapseSelector from "./SynapseSelector";
+import type Neuron from "~/types/Neuron";
 
 interface Props {
+  neurons: Neuron[];
+  synapses: Synapse[];
   synapse: Synapse;
   fromLabel: string;
   toLabel: string;
   handlers: Handlers;
 }
 
-const SynapseBuilder = ({ synapse, fromLabel, toLabel, handlers }: Props) => {
+const SynapseBuilder = ({
+  neurons,
+  synapses,
+  synapse,
+  fromLabel,
+  toLabel,
+  handlers,
+}: Props) => {
   const { from, to, weight } = synapse;
 
   return (
     <div className="flex flex-col gap-3">
       <div>
         Editing synapse{" "}
-        <InlineMath math={`${fromLabel} \\rightarrow ${toLabel}`} />:
+        <SynapseSelector
+          neurons={neurons}
+          synapses={synapses}
+          synapseString={`${fromLabel} \\rightarrow ${toLabel}`}
+          handlers={handlers}
+        />
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">
