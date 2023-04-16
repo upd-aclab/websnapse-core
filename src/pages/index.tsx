@@ -1,24 +1,24 @@
 import Head from "next/head";
 import System from "~/components/System";
 import { useEffect, useState } from "react";
-import { DefaultSystem } from "~/types/System";
+import { defaultSystem } from "~/types/System";
 import { type NextPage } from "next";
 import Builder from "~/components/Builder";
 import ModeSelector from "~/components/ModeSelector";
-import type Neuron from "~/types/Neuron";
 import type Handlers from "~/types/Handlers";
-import type Selected from "~/types/Selected";
 import matchesRegex from "~/utils/matchesRegex";
 import Simulator from "~/components/Simulator";
+import { generateNeuron } from "~/types/Neuron";
+import { defaultRule } from "~/types/Rule";
+import { defaultSelected } from "~/types/Selected";
+import sameTuple from "~/utils/sameTuple";
 
 const Home: NextPage = () => {
   const [mode, setMode] = useState(0);
-  const [system, setSystem] = useState(DefaultSystem);
-  const [selected, setSelected] = useState<Selected>({
-    neuron: 1,
-    rule: 0,
-    synapse: 0,
-  });
+
+  const [system, setSystem] = useState(defaultSystem);
+  const [selected, setSelected] = useState(defaultSelected);
+
   const [time, setTime] = useState(0);
   const [simulating, setSimulating] = useState(false);
 
@@ -32,25 +32,51 @@ const Home: NextPage = () => {
     }
   }, [simulating]);
 
-  const addNeuron = () => {
-    const newNeuron: Neuron = {
-      id: system.neurons.length + 1,
-      label: String.raw`\verb|<label>|`,
-      spikes: 0,
-      rules: [
-        {
-          regex: "a",
-          consumed: 1,
-          produced: 1,
-          delay: 0,
-        },
-      ],
-      downtime: 0,
-    };
+  const addNeuron = (): number => {
+    const newNeuron = generateNeuron();
     setSystem((previousSystem) => ({
       ...previousSystem,
       neurons: [...previousSystem.neurons, newNeuron],
     }));
+    return newNeuron.id;
+  };
+
+  const deleteNeuron = () => {
+    setSystem((previousSystem) => ({
+      ...previousSystem,
+      neurons: previousSystem.neurons.filter(
+        (neuron) => neuron.id !== selected.neuron
+      ),
+      synapses: previousSystem.synapses.filter(
+        ({ from, to }) => from !== selected.neuron && to !== selected.neuron
+      ),
+    }));
+  };
+
+  const addRule = () => {
+    setSystem((previousSystem) => ({
+      ...previousSystem,
+      neurons: previousSystem.neurons.map((neuron) => ({
+        ...neuron,
+        rules:
+          neuron.id === selected.neuron
+            ? [...neuron.rules, defaultRule]
+            : neuron.rules,
+      })),
+    }));
+  };
+
+  const deleteRule = () => {
+    setSystem((previousSystem) => ({
+      ...previousSystem,
+      neurons: previousSystem.neurons.map((neuron) => ({
+        ...neuron,
+        rules: neuron.rules.filter(
+          (_, ruleIndex) => !sameTuple([neuron.id, ruleIndex], selected.rule)
+        ),
+      })),
+    }));
+    return selected.rule[1];
   };
 
   const setLabel = (label: string) => {
@@ -78,12 +104,11 @@ const Home: NextPage = () => {
       ...previousSystem,
       neurons: previousSystem.neurons.map((neuron) => ({
         ...neuron,
-        rules: neuron.rules.map((rule, index) => ({
+        rules: neuron.rules.map((rule, ruleIndex) => ({
           ...rule,
-          regex:
-            neuron.id === selected.neuron && index === selected.rule
-              ? regex
-              : rule.regex,
+          regex: sameTuple([neuron.id, ruleIndex], selected.rule)
+            ? regex
+            : rule.regex,
         })),
       })),
     }));
@@ -94,12 +119,11 @@ const Home: NextPage = () => {
       ...previousSystem,
       neurons: previousSystem.neurons.map((neuron) => ({
         ...neuron,
-        rules: neuron.rules.map((rule, index) => ({
+        rules: neuron.rules.map((rule, ruleIndex) => ({
           ...rule,
-          consumed:
-            neuron.id === selected.neuron && index === selected.rule
-              ? consumed
-              : rule.consumed,
+          consumed: sameTuple([neuron.id, ruleIndex], selected.rule)
+            ? consumed
+            : rule.consumed,
         })),
       })),
     }));
@@ -110,12 +134,11 @@ const Home: NextPage = () => {
       ...previousSystem,
       neurons: previousSystem.neurons.map((neuron) => ({
         ...neuron,
-        rules: neuron.rules.map((rule, index) => ({
+        rules: neuron.rules.map((rule, ruleIndex) => ({
           ...rule,
-          produced:
-            neuron.id === selected.neuron && index === selected.rule
-              ? produced
-              : rule.produced,
+          produced: sameTuple([neuron.id, ruleIndex], selected.rule)
+            ? produced
+            : rule.produced,
         })),
       })),
     }));
@@ -126,12 +149,11 @@ const Home: NextPage = () => {
       ...previousSystem,
       neurons: previousSystem.neurons.map((neuron) => ({
         ...neuron,
-        rules: neuron.rules.map((rule, index) => ({
+        rules: neuron.rules.map((rule, ruleIndex) => ({
           ...rule,
-          delay:
-            neuron.id === selected.neuron && index === selected.rule
-              ? delay
-              : rule.delay,
+          delay: sameTuple([neuron.id, ruleIndex], selected.rule)
+            ? delay
+            : rule.delay,
         })),
       })),
     }));
@@ -140,9 +162,11 @@ const Home: NextPage = () => {
   const setFrom = (from: number) => {
     setSystem((previousSystem) => ({
       ...previousSystem,
-      synapses: previousSystem.synapses.map((synapse, index) => ({
+      synapses: previousSystem.synapses.map((synapse) => ({
         ...synapse,
-        from: index === selected.synapse ? from : synapse.from,
+        from: sameTuple([synapse.from, synapse.to], selected.synapse)
+          ? from
+          : synapse.from,
       })),
     }));
   };
@@ -150,9 +174,11 @@ const Home: NextPage = () => {
   const setTo = (to: number) => {
     setSystem((previousSystem) => ({
       ...previousSystem,
-      synapses: previousSystem.synapses.map((synapse, index) => ({
+      synapses: previousSystem.synapses.map((synapse) => ({
         ...synapse,
-        to: index === selected.synapse ? to : synapse.to,
+        to: sameTuple([synapse.from, synapse.to], selected.synapse)
+          ? to
+          : synapse.to,
       })),
     }));
   };
@@ -160,9 +186,11 @@ const Home: NextPage = () => {
   const setWeight = (weight: number) => {
     setSystem((previousSystem) => ({
       ...previousSystem,
-      synapses: previousSystem.synapses.map((synapse, index) => ({
+      synapses: previousSystem.synapses.map((synapse) => ({
         ...synapse,
-        weight: index === selected.synapse ? weight : synapse.weight,
+        weight: sameTuple([synapse.from, synapse.to], selected.synapse)
+          ? weight
+          : synapse.weight,
       })),
     }));
   };
@@ -174,17 +202,17 @@ const Home: NextPage = () => {
     }));
   };
 
-  const setRule = (index: number) => {
+  const setRule = (id: [number, number]) => {
     setSelected((previousSelected) => ({
       ...previousSelected,
-      rule: index,
+      rule: id,
     }));
   };
 
-  const setSynapse = (index: number) => {
+  const setSynapse = (id: [number, number]) => {
     setSelected((previousSelected) => ({
       ...previousSelected,
-      synapse: index,
+      synapse: id,
     }));
   };
 
@@ -216,6 +244,9 @@ const Home: NextPage = () => {
 
   const handlers: Handlers = {
     addNeuron,
+    deleteNeuron,
+    addRule,
+    deleteRule,
     setLabel,
     setSpikes,
     setRegex,

@@ -1,5 +1,8 @@
 interface Handlers {
-  addNeuron: () => void;
+  addNeuron: () => number;
+  deleteNeuron: () => void;
+  addRule: () => void;
+  deleteRule: () => number;
   setLabel: (label: string) => void;
   setSpikes: (spikes: number) => void;
   setRegex: (regex: string) => void;
@@ -10,8 +13,8 @@ interface Handlers {
   setTo: (to: number) => void;
   setWeight: (weight: number) => void;
   setNeuron: (id: number) => void;
-  setRule: (id: number) => void;
-  setSynapse: (id: number) => void;
+  setRule: (id: [number, number]) => void;
+  setSynapse: (id: [number, number]) => void;
 }
 
 export default Handlers;
