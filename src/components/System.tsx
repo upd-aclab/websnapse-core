@@ -4,18 +4,21 @@ import System from "~/types/System";
 import Synapse from "./Synapse";
 import type Selected from "~/types/Selected";
 import sameTuple from "~/utils/sameTuple";
+import type Handlers from "~/types/Handlers";
 
 interface Props {
+  handlers: Handlers;
   system: System;
   selected: Selected;
 }
 
-const System = ({ system, selected }: Props) => {
+const System = ({ handlers, system, selected }: Props) => {
   const neuronsJSX = system.neurons.map((neuron, index) => (
     <Neuron
       key={index}
       data={neuron}
       selected={neuron.id === selected.neuron}
+      handlers={handlers}
       selectedRule={selected.rule}
     />
   ));

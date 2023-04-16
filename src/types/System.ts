@@ -15,6 +15,10 @@ const defaultSystem: System = {
       id: 1,
       spikes: 0,
       label: "n_{1}",
+      position: {
+        x: 0,
+        y: 0,
+      },
       rules: [
         {
           regex: "a",
@@ -35,6 +39,10 @@ const defaultSystem: System = {
       id: 2,
       spikes: 0,
       label: "n_{2}",
+      position: {
+        x: 300,
+        y: 0,
+      },
       rules: [
         {
           regex: "a",
@@ -49,6 +57,10 @@ const defaultSystem: System = {
       id: 3,
       spikes: 0,
       label: "n_{3}",
+      position: {
+        x: 0,
+        y: 300,
+      },
       rules: [
         {
           regex: "a",
@@ -63,6 +75,7 @@ const defaultSystem: System = {
       id: 4,
       spikes: 0,
       label: "n_{4}",
+      position: { x: 300, y: 300 },
       rules: [
         {
           regex: "a",

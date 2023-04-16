@@ -12,8 +12,8 @@ const Synapse = ({ data, selected }: Props) => {
 
   return (
     <Xarrow
-      start={`${from}`}
-      end={`${to}`}
+      start={from.toString()}
+      end={to.toString()}
       path="straight"
       color={selected ? "lightblue" : "lightgray"}
       labels={

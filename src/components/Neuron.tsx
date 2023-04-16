@@ -1,41 +1,49 @@
-import Draggable from "react-draggable";
+import Draggable, {
+  type DraggableData,
+  type DraggableEvent,
+} from "react-draggable";
 import { useRef } from "react";
 import { InlineMath } from "react-katex";
 import { useXarrow } from "react-xarrows";
 import type NeuronType from "~/types/Neuron";
 import Rule from "./Rule";
 import sameTuple from "~/utils/sameTuple";
+import type Handlers from "~/types/Handlers";
 
 interface Props {
   data: NeuronType;
   selected: boolean;
+  handlers: Handlers;
   selectedRule: [number, number];
 }
 
-const Neuron = ({ data, selected, selectedRule }: Props) => {
+const Neuron = ({ data, selected, handlers, selectedRule }: Props) => {
   const updateXArrow = useXarrow();
   const nodeRef = useRef(null);
 
-  const { id, spikes, label, rules, downtime } = data;
+  const { id, spikes, label, position, rules, downtime } = data;
+
+  const onControlledDrag = (_: DraggableEvent, position: DraggableData) => {
+    handlers.setPosition(id, position);
+  };
 
   return (
     <Draggable
-      onDrag={updateXArrow}
+      position={position}
+      onDrag={(e, position) => {
+        updateXArrow();
+        onControlledDrag(e, position);
+      }}
       onStop={updateXArrow}
       nodeRef={nodeRef}
       bounds="parent"
     >
       <div
         ref={nodeRef}
-        id={`${id}`}
+        id={id.toString()}
         className={`${
           selected ? "text-blue-500 border-blue-500" : "text-black border-black"
         } flex w-fit items-center justify-center rounded-md border-2 border-solid bg-white px-3 py-1 hover:cursor-move`}
-        style={{
-          position: "absolute",
-          top: 200 * (Math.floor((id - 1) / 2) + 1),
-          left: 300 * (((id - 1) % 2) + 1),
-        }}
       >
         <span className="absolute -left-6 -top-6">
           <InlineMath math={`${label}`} />

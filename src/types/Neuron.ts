@@ -3,6 +3,10 @@ import type Rule from "./Rule";
 interface Neuron {
   id: number;
   label: string;
+  position: {
+    x: number;
+    y: number;
+  };
   spikes: number;
   rules: Rule[];
   downtime: number;
@@ -11,6 +15,10 @@ interface Neuron {
 const generateNeuron = (): Neuron => ({
   id: Date.now(),
   label: String.raw`\verb|<label>|`,
+  position: {
+    x: 0,
+    y: 0,
+  },
   spikes: 0,
   rules: [
     {

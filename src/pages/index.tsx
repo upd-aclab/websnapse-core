@@ -12,6 +12,7 @@ import { generateNeuron } from "~/types/Neuron";
 import { defaultRule } from "~/types/Rule";
 import { defaultSelected } from "~/types/Selected";
 import sameTuple from "~/utils/sameTuple";
+import { type DraggableData } from "react-draggable";
 
 const Home: NextPage = () => {
   const [mode, setMode] = useState(0);
@@ -95,6 +96,16 @@ const Home: NextPage = () => {
       neurons: previousSystem.neurons.map((neuron) => ({
         ...neuron,
         spikes: neuron.id === selected.neuron ? spikes : neuron.spikes,
+      })),
+    }));
+  };
+
+  const setPosition = (id: number, position: DraggableData) => {
+    setSystem((previousSystem) => ({
+      ...previousSystem,
+      neurons: previousSystem.neurons.map((neuron) => ({
+        ...neuron,
+        position: neuron.id === id ? position : neuron.position,
       })),
     }));
   };
@@ -249,6 +260,7 @@ const Home: NextPage = () => {
     deleteRule,
     setLabel,
     setSpikes,
+    setPosition,
     setRegex,
     setConsumed,
     setProduced,
@@ -286,7 +298,7 @@ const Home: NextPage = () => {
             {ModeComponents[mode]}
             <ModeSelector mode={mode} setMode={setMode} />
           </div>
-          <System system={system} selected={selected} />
+          <System handlers={handlers} system={system} selected={selected} />
         </div>
       </main>
     </>
