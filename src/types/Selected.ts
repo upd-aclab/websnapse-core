@@ -1,13 +1,13 @@
 interface Selected {
   neuron: number;
-  rule: number;
-  synapse: number;
+  rule: [number, number];
+  synapse: [number, number];
 }
 
 const defaultSelected: Selected = {
   neuron: 1,
-  rule: 0,
-  synapse: 0,
+  rule: [1, 0],
+  synapse: [1, 2],
 };
 
 export default Selected;
