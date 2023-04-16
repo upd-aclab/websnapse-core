@@ -30,7 +30,7 @@ const RuleSelector = ({ neuron, ruleString, handlers }: Props) => {
                 )}
                 <DropdownMenu.Item
                   className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
-                  onClick={() => handlers.setRule(index)}
+                  onClick={() => handlers.setRule([neuron.id, index])}
                 >
                   <InlineMath math={`${getRuleString(rule)}`} />
                 </DropdownMenu.Item>

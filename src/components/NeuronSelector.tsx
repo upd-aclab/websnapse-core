@@ -31,7 +31,7 @@ const NeuronSelector = ({ neurons, label, handlers }: Props) => {
                   className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
                   onClick={() => {
                     handlers.setNeuron(id);
-                    handlers.setRule(0);
+                    handlers.setRule([id, 0]);
                   }}
                 >
                   <InlineMath math={`${label}`} />

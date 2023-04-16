@@ -2,15 +2,24 @@ import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
 import NeuronSelector from "./NeuronSelector";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import type Synapse from "~/types/Synapse";
 
 interface Props {
   neurons: Neuron[];
+  synapses: Synapse[];
   neuron: Neuron;
+  synapse: Synapse;
   handlers: Handlers;
 }
 
-const NeuronBuilder = ({ neurons, neuron, handlers }: Props) => {
-  const { label, spikes } = neuron;
+const NeuronBuilder = ({
+  neurons,
+  synapses,
+  neuron,
+  synapse,
+  handlers,
+}: Props) => {
+  const { id, label, spikes } = neuron;
 
   return (
     <div className="flex flex-col gap-3">
@@ -22,9 +31,9 @@ const NeuronBuilder = ({ neurons, neuron, handlers }: Props) => {
         <div
           className="h-6 w-6 border ml-auto border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
           onClick={() => {
-            handlers.addNeuron();
-            handlers.setNeuron(neurons.length + 1);
-            handlers.setRule(0);
+            const newId = handlers.addNeuron();
+            handlers.setNeuron(newId);
+            handlers.setRule([newId, 0]);
           }}
         >
           <AiOutlinePlus />
@@ -33,8 +42,24 @@ const NeuronBuilder = ({ neurons, neuron, handlers }: Props) => {
           className="h-6 w-6 border ml-2 border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
           onClick={() => {
             handlers.deleteNeuron();
-            handlers.setNeuron(neurons.length - 1);
-            handlers.setRule(0);
+
+            const newNeuronReference = neurons.find(
+              (neuron) => neuron.id !== id
+            )!;
+
+            handlers.setNeuron(newNeuronReference.id);
+            handlers.setRule([newNeuronReference.id, 0]);
+
+            const newSynapseReference = synapses.find(
+              ({ from, to }) => from !== id && to !== id
+            )!;
+
+            if (synapse.from === id || synapse.to === id) {
+              handlers.setSynapse([
+                newSynapseReference.from,
+                newSynapseReference.to,
+              ]);
+            }
           }}
         >
           <AiOutlineMinus />

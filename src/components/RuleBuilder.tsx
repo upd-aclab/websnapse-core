@@ -39,7 +39,7 @@ const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
           className="h-6 w-6 border ml-auto border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
           onClick={() => {
             handlers.addRule();
-            handlers.setRule(neuron.rules.length);
+            handlers.setRule([neuron.id, neuron.rules.length]);
           }}
         >
           <AiOutlinePlus />
@@ -48,8 +48,8 @@ const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
           <div
             className="h-6 w-6 border ml-2 border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
             onClick={() => {
-              handlers.deleteRule();
-              handlers.setRule(neuron.rules.length - 2);
+              const ruleIndex = handlers.deleteRule();
+              handlers.setRule([neuron.id, Math.max(0, ruleIndex - 1)]);
             }}
           >
             <AiOutlineMinus />
