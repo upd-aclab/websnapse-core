@@ -38,17 +38,6 @@ const NeuronSelector = ({ neurons, label, handlers }: Props) => {
                 </DropdownMenu.Item>
               </div>
             ))}
-            <DropdownMenu.Separator className="w-[1px] bg-lilac" />
-            <DropdownMenu.Item
-              className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
-              onClick={() => {
-                handlers.addNeuron();
-                handlers.setNeuron(neurons.length + 1);
-                handlers.setRule(0);
-              }}
-            >
-              +
-            </DropdownMenu.Item>
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
