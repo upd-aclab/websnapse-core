@@ -1,10 +1,10 @@
+import type Handlers from "~/types/Handlers";
+import type Selected from "~/types/Selected";
 import type System from "~/types/System";
+import sameTuple from "~/utils/sameTuple";
 import NeuronBuilder from "./NeuronBuilder";
 import RuleBuilder from "./RuleBuilder";
 import SynapseBuilder from "./SynapseBuilder";
-import type Handlers from "~/types/Handlers";
-import type Selected from "~/types/Selected";
-import sameTuple from "~/utils/sameTuple";
 
 interface Props {
   system: System;

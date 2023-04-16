@@ -1,7 +1,7 @@
 import type Handlers from "~/types/Handlers";
+import type Neuron from "~/types/Neuron";
 import type Synapse from "~/types/Synapse";
 import SynapseSelector from "./SynapseSelector";
-import type Neuron from "~/types/Neuron";
 
 interface Props {
   neurons: Neuron[];

@@ -1,8 +1,8 @@
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
-import NeuronSelector from "./NeuronSelector";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import type Synapse from "~/types/Synapse";
+import NeuronSelector from "./NeuronSelector";
 
 interface Props {
   neurons: Neuron[];

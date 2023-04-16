@@ -1,10 +1,10 @@
 import { Xwrapper } from "react-xarrows";
-import Neuron from "./Neuron";
-import System from "~/types/System";
-import Synapse from "./Synapse";
-import type Selected from "~/types/Selected";
-import sameTuple from "~/utils/sameTuple";
 import type Handlers from "~/types/Handlers";
+import type Selected from "~/types/Selected";
+import System from "~/types/System";
+import sameTuple from "~/utils/sameTuple";
+import Neuron from "./Neuron";
+import Synapse from "./Synapse";
 
 interface Props {
   handlers: Handlers;

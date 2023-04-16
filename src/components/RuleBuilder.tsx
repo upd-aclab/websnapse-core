@@ -1,10 +1,10 @@
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { InlineMath } from "react-katex";
 import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
 import type Rule from "~/types/Rule";
 import getRuleString from "~/utils/getRuleString";
 import RuleSelector from "./RuleSelector";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 interface Props {
   neuron: Neuron;

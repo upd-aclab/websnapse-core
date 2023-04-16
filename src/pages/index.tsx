@@ -1,18 +1,18 @@
-import Head from "next/head";
-import System from "~/components/System";
-import { useEffect, useState } from "react";
-import { defaultSystem } from "~/types/System";
 import { type NextPage } from "next";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import { type DraggableData } from "react-draggable";
 import Builder from "~/components/Builder";
 import ModeSelector from "~/components/ModeSelector";
-import type Handlers from "~/types/Handlers";
-import matchesRegex from "~/utils/matchesRegex";
 import Simulator from "~/components/Simulator";
+import System from "~/components/System";
+import type Handlers from "~/types/Handlers";
 import { generateNeuron } from "~/types/Neuron";
 import { defaultRule } from "~/types/Rule";
 import { defaultSelected } from "~/types/Selected";
+import { defaultSystem } from "~/types/System";
+import matchesRegex from "~/utils/matchesRegex";
 import sameTuple from "~/utils/sameTuple";
-import { type DraggableData } from "react-draggable";
 
 const Home: NextPage = () => {
   const [mode, setMode] = useState(0);

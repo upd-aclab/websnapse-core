@@ -1,14 +1,14 @@
+import { useRef } from "react";
 import Draggable, {
   type DraggableData,
   type DraggableEvent,
 } from "react-draggable";
-import { useRef } from "react";
 import { InlineMath } from "react-katex";
 import { useXarrow } from "react-xarrows";
-import type NeuronType from "~/types/Neuron";
-import Rule from "./Rule";
-import sameTuple from "~/utils/sameTuple";
 import type Handlers from "~/types/Handlers";
+import type NeuronType from "~/types/Neuron";
+import sameTuple from "~/utils/sameTuple";
+import Rule from "./Rule";
 
 interface Props {
   data: NeuronType;
