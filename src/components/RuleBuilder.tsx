@@ -4,6 +4,7 @@ import type Neuron from "~/types/Neuron";
 import type Rule from "~/types/Rule";
 import getRuleString from "~/utils/getRuleString";
 import RuleSelector from "./RuleSelector";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 interface Props {
   neuron: Neuron;
@@ -23,14 +24,36 @@ const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <div>
-        Editing rule{" "}
-        <RuleSelector
-          neuron={neuron}
-          ruleString={getRuleString(rule)}
-          handlers={handlers}
-        />{" "}
-        in <InlineMath math={`${neuron.label}`} />
+      <div className="flex items-center">
+        <div>
+          Editing rule{" "}
+          <RuleSelector
+            neuron={neuron}
+            ruleString={getRuleString(rule)}
+            handlers={handlers}
+          />{" "}
+          in <InlineMath math={`${neuron.label}`} />
+        </div>
+        <div
+          className="h-6 w-6 border ml-auto border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
+          onClick={() => {
+            handlers.addRule();
+            handlers.setRule(neuron.rules.length);
+          }}
+        >
+          <AiOutlinePlus />
+        </div>
+        {neuron.rules.length > 1 && (
+          <div
+            className="h-6 w-6 border ml-2 border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
+            onClick={() => {
+              handlers.deleteRule();
+              handlers.setRule(neuron.rules.length - 2);
+            }}
+          >
+            <AiOutlineMinus />
+          </div>
+        )}
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">
