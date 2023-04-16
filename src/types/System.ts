@@ -1,14 +1,15 @@
 import type Neuron from "./Neuron";
 import type Synapse from "./Synapse";
+import type Terminal from "./Terminal";
 
 interface System {
   neurons: Neuron[];
   synapses: Synapse[];
-  inputNeurons: number[];
-  outputNeurons: number[];
+  inputNeurons: Terminal[];
+  outputNeurons: Terminal[];
 }
 
-const DefaultSystem: System = {
+const defaultSystem: System = {
   neurons: [
     {
       id: 1,
@@ -100,9 +101,19 @@ const DefaultSystem: System = {
       weight: 1,
     },
   ],
-  inputNeurons: [1],
-  outputNeurons: [1],
+  inputNeurons: [
+    {
+      id: 1,
+      values: [0, 1, 0],
+    },
+  ],
+  outputNeurons: [
+    {
+      id: 4,
+      values: [],
+    },
+  ],
 };
 
 export default System;
-export { DefaultSystem };
+export { defaultSystem };
