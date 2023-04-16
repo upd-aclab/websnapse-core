@@ -15,6 +15,7 @@ interface Props {
 const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
   const { regex, consumed, produced, delay } = rule;
 
+  const regexOk = regex.length > 0;
   const consumedOk =
     consumed >= 1 &&
     (isNaN(produced) || consumed >= produced) &&
@@ -63,7 +64,9 @@ const RuleBuilder = ({ neuron, rule, handlers }: Props) => {
             value={regex}
             placeholder="a^{2}"
             onChange={(e) => handlers.setRegex(e.target.value)}
-            className="w-full rounded-md border border-solid border-lilac px-3 py-1"
+            className={`w-full rounded-md border-2 border-solid ${
+              regexOk ? "border-green-600" : "border-red-600"
+            } px-3 py-1`}
           />
         </label>
         <label className="flex items-center">
