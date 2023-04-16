@@ -41,7 +41,7 @@ const SynapseSelector = ({
                   )}
                   <DropdownMenu.Item
                     className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
-                    onClick={() => handlers.setSynapse(index)}
+                    onClick={() => handlers.setSynapse([from, to])}
                   >
                     <InlineMath math={`${fromLabel} \\rightarrow ${toLabel}`} />
                   </DropdownMenu.Item>

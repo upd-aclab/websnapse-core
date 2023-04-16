@@ -3,6 +3,7 @@ import Neuron from "./Neuron";
 import System from "~/types/System";
 import Synapse from "./Synapse";
 import type Selected from "~/types/Selected";
+import sameTuple from "~/utils/sameTuple";
 
 interface Props {
   system: System;
@@ -14,14 +15,17 @@ const System = ({ system, selected }: Props) => {
     <Neuron
       key={index}
       data={neuron}
-      index={index}
       selected={neuron.id === selected.neuron}
       selectedRule={selected.rule}
     />
   ));
 
   const synapsesJSX = system.synapses.map((synapse, index) => (
-    <Synapse key={index} data={synapse} selected={index === selected.synapse} />
+    <Synapse
+      key={index}
+      data={synapse}
+      selected={sameTuple([synapse.from, synapse.to], selected.synapse)}
+    />
   ));
 
   return (

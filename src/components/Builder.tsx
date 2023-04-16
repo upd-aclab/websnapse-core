@@ -4,6 +4,7 @@ import RuleBuilder from "./RuleBuilder";
 import SynapseBuilder from "./SynapseBuilder";
 import type Handlers from "~/types/Handlers";
 import type Selected from "~/types/Selected";
+import sameTuple from "~/utils/sameTuple";
 
 interface Props {
   system: System;
@@ -16,9 +17,11 @@ const Builder = ({ system, handlers, selected }: Props) => {
     (neuron) => neuron.id === selected.neuron
   )!;
 
-  const rule = neuron.rules[selected.rule]!;
+  const rule = neuron.rules[selected.rule[1]]!;
 
-  const synapse = system.synapses[selected.synapse]!;
+  const synapse = system.synapses.find((synapse) =>
+    sameTuple([synapse.from, synapse.to], selected.synapse)
+  )!;
 
   const fromLabel = system.neurons.find(
     (neuron) => neuron.id === synapse.from
@@ -34,7 +37,9 @@ const Builder = ({ system, handlers, selected }: Props) => {
         <div className="flex flex-col gap-3 p-5">
           <NeuronBuilder
             neurons={system.neurons}
+						synapses={system.synapses}
             neuron={neuron}
+						synapse={synapse}
             handlers={handlers}
           />
         </div>

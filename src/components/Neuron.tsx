@@ -4,15 +4,15 @@ import { InlineMath } from "react-katex";
 import { useXarrow } from "react-xarrows";
 import type NeuronType from "~/types/Neuron";
 import Rule from "./Rule";
+import sameTuple from "~/utils/sameTuple";
 
 interface Props {
   data: NeuronType;
-  index: number;
   selected: boolean;
-  selectedRule: number;
+  selectedRule: [number, number];
 }
 
-const Neuron = ({ data, index, selected, selectedRule }: Props) => {
+const Neuron = ({ data, selected, selectedRule }: Props) => {
   const updateXArrow = useXarrow();
   const nodeRef = useRef(null);
 
@@ -33,8 +33,8 @@ const Neuron = ({ data, index, selected, selectedRule }: Props) => {
         } flex w-fit items-center justify-center rounded-md border-2 border-solid bg-white px-3 py-1 hover:cursor-move`}
         style={{
           position: "absolute",
-          top: 200 * (Math.floor(index / 2) + 1),
-          left: 300 * ((index % 2) + 1),
+          top: 200 * (Math.floor((id - 1) / 2) + 1),
+          left: 300 * (((id - 1) % 2) + 1),
         }}
       >
         <span className="absolute -left-6 -top-6">
@@ -46,7 +46,7 @@ const Neuron = ({ data, index, selected, selectedRule }: Props) => {
             <Rule
               key={index}
               data={rule}
-              selected={selected && selectedRule === index}
+              selected={sameTuple([id, index], selectedRule)}
             />
           ))}
           <InlineMath math={`${downtime}`} />
