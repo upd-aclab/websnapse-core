@@ -20,6 +20,10 @@ const NeuronSelectorItem = ({ neuronAtom, index }: Props) => {
           neuronsAtom,
           get(neuronsAtom).map((neuron) => ({
             ...neuron,
+            rules: neuron.rules.map((rule) => ({
+              ...rule,
+              selected: false,
+            })),
             selected: false,
           }))
         )
@@ -37,6 +41,10 @@ const NeuronSelectorItem = ({ neuronAtom, index }: Props) => {
           resetSelectedNeuron();
           setNeuron((previousNeuron) => ({
             ...previousNeuron,
+            rules: previousNeuron.rules.map((rule, index) => ({
+              ...rule,
+              selected: index === 0,
+            })),
             selected: true,
           }));
         }}
