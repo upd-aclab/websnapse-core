@@ -22,8 +22,8 @@ const defaultSystem: System = {
       rules: [
         {
           regex: "a",
-          consumed: 2,
-          produced: 1,
+          consumed: 1,
+          produced: 0,
           delay: 0,
         },
         {
@@ -46,8 +46,8 @@ const defaultSystem: System = {
       rules: [
         {
           regex: "a",
-          consumed: 2,
-          produced: 1,
+          consumed: 1,
+          produced: 0,
           delay: 0,
         },
       ],
@@ -64,8 +64,8 @@ const defaultSystem: System = {
       rules: [
         {
           regex: "a",
-          consumed: 2,
-          produced: 1,
+          consumed: 1,
+          produced: 0,
           delay: 0,
         },
       ],
@@ -79,8 +79,8 @@ const defaultSystem: System = {
       rules: [
         {
           regex: "a",
-          consumed: 2,
-          produced: 1,
+          consumed: 1,
+          produced: 0,
           delay: 0,
         },
       ],
