@@ -1,6 +1,6 @@
 interface Terminal {
   id: number;
-  values: number[];
+  spikeTimes: number[];
 }
 
 export default Terminal;

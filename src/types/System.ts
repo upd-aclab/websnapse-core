@@ -117,13 +117,13 @@ const defaultSystem: System = {
   inputNeurons: [
     {
       id: 1,
-      values: [0, 1, 0],
+      spikeTimes: [1],
     },
   ],
   outputNeurons: [
     {
       id: 4,
-      values: [],
+      spikeTimes: [],
     },
   ],
 };
