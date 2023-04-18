@@ -13,7 +13,7 @@ const Simulator = () => {
       }, 1000);
       return () => clearInterval(intervalId);
     }
-  });
+  }, [simulating, setTime]);
 
   return (
     <section className="w-full">

@@ -1,6 +1,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { atom, useAtom, useSetAtom, type PrimitiveAtom } from "jotai";
 import { focusAtom } from "jotai-optics";
+import { useMemo } from "react";
 import { InlineMath } from "react-katex";
 import type Neuron from "~/types/Neuron";
 import type Rule from "~/types/Rule";
@@ -15,15 +16,22 @@ interface Props {
 const RuleSelectorItem = ({ neuronAtom, ruleAtom, index }: Props) => {
   const [rule, setRule] = useAtom(ruleAtom);
 
-  const rulesAtom = focusAtom(neuronAtom, (optic) => optic.prop("rules"));
-  const resetSelectedRuleAtom = atom(null, (get, set) =>
-    set(
-      rulesAtom,
-      get(rulesAtom).map((rule) => ({
-        ...rule,
-        selected: false,
-      }))
-    )
+  const rulesAtom = useMemo(
+    () => focusAtom(neuronAtom, (optic) => optic.prop("rules")),
+    [neuronAtom]
+  );
+  const resetSelectedRuleAtom = useMemo(
+    () =>
+      atom(null, (get, set) =>
+        set(
+          rulesAtom,
+          get(rulesAtom).map((rule) => ({
+            ...rule,
+            selected: false,
+          }))
+        )
+      ),
+    [rulesAtom]
   );
   const resetSelectedRule = useSetAtom(resetSelectedRuleAtom);
 

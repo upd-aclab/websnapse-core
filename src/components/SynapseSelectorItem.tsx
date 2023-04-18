@@ -6,6 +6,7 @@ import {
   useSetAtom,
   type PrimitiveAtom,
 } from "jotai";
+import { useMemo } from "react";
 import { InlineMath } from "react-katex";
 import { neuronsAtom, synapsesAtom } from "~/atoms/primitives";
 import type Synapse from "~/types/Synapse";
@@ -24,14 +25,18 @@ const SynapseSelectorItem = ({ synapseAtom, index }: Props) => {
   const toLabel = neurons.find((neuron) => neuron.id === to)!.label;
   const synapseString = `${fromLabel} \\rightarrow ${toLabel}`;
 
-  const resetSelectedSynapseAtom = atom(null, (get, set) =>
-    set(
-      synapsesAtom,
-      get(synapsesAtom).map((synapse) => ({
-        ...synapse,
-        selected: false,
-      }))
-    )
+  const resetSelectedSynapseAtom = useMemo(
+    () =>
+      atom(null, (get, set) =>
+        set(
+          synapsesAtom,
+          get(synapsesAtom).map((synapse) => ({
+            ...synapse,
+            selected: false,
+          }))
+        )
+      ),
+    []
   );
   const resetSelectedSynapse = useSetAtom(resetSelectedSynapseAtom);
 

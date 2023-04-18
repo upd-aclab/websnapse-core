@@ -1,6 +1,7 @@
 import { useAtom, useAtomValue, type PrimitiveAtom } from "jotai";
 import { focusAtom } from "jotai-optics";
 import { splitAtom } from "jotai/utils";
+import { useMemo } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import type Neuron from "~/types/Neuron";
 import NeuronSelector from "./NeuronSelector";
@@ -14,7 +15,10 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
   const [neuron, setNeuron] = useAtom(neuronAtom);
   const { label, spikes, selected } = neuron;
 
-  const rulesAtom = focusAtom(neuronAtom, (optic) => optic.prop("rules"));
+  const rulesAtom = useMemo(
+    () => focusAtom(neuronAtom, (optic) => optic.prop("rules")),
+    [neuronAtom]
+  );
   const ruleAtomsAtom = splitAtom(rulesAtom);
   const ruleAtoms = useAtomValue(ruleAtomsAtom);
 
