@@ -1,12 +1,10 @@
-import { type Dispatch, type SetStateAction } from "react";
+import { useAtom } from "jotai";
 import { FaHammer, FaPlay } from "react-icons/fa";
+import { modeAtom } from "~/atoms/primitives";
 
-interface Props {
-  mode: number;
-  setMode: Dispatch<SetStateAction<number>>;
-}
+const ModeSelector = () => {
+  const [mode, setMode] = useAtom(modeAtom);
 
-const ModeSelector = ({ mode, setMode }: Props) => {
   const modes = [
     {
       icon: <FaHammer size={20} />,

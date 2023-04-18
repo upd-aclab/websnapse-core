@@ -1,17 +1,22 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { useAtomValue, type PrimitiveAtom } from "jotai";
+import { focusAtom } from "jotai-optics";
+import { splitAtom } from "jotai/utils";
 import { InlineMath } from "react-katex";
-import type Handlers from "~/types/Handlers";
 import type Neuron from "~/types/Neuron";
-import getRuleString from "~/utils/getRuleString";
+import RuleSelectorItem from "./RuleSelectorItem";
 
 interface Props {
-  neuron: Neuron;
+  neuronAtom: PrimitiveAtom<Neuron>;
   ruleString: string;
-  handlers: Handlers;
 }
 
-const RuleSelector = ({ neuron, ruleString, handlers }: Props) => {
-  return neuron ? (
+const RuleSelector = ({ neuronAtom, ruleString }: Props) => {
+  const rulesAtom = focusAtom(neuronAtom, (optic) => optic.prop("rules"));
+  const ruleAtomsAtom = splitAtom(rulesAtom);
+  const ruleAtoms = useAtomValue(ruleAtomsAtom);
+
+  return (
     <span>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger className="h-8 rounded-md border border-solid border-lilac mx-1 px-2 text-start">
@@ -23,25 +28,18 @@ const RuleSelector = ({ neuron, ruleString, handlers }: Props) => {
             className="flex flex-col overflow-hidden rounded-md border border-solid border-lilac bg-white"
           >
             <DropdownMenu.Arrow className="fill-lilac" />
-            {neuron.rules.map((rule, index) => (
-              <div key={index}>
-                {index > 0 && (
-                  <DropdownMenu.Separator className="h-[1px] bg-lilac" />
-                )}
-                <DropdownMenu.Item
-                  className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
-                  onClick={() => handlers.setRule([neuron.id, index])}
-                >
-                  <InlineMath math={`${getRuleString(rule)}`} />
-                </DropdownMenu.Item>
-              </div>
+            {ruleAtoms.map((ruleAtom, index) => (
+              <RuleSelectorItem
+                key={index}
+                neuronAtom={neuronAtom}
+                ruleAtom={ruleAtom}
+                index={index}
+              />
             ))}
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
     </span>
-  ) : (
-    <div>No neuron selected!</div>
   );
 };
 

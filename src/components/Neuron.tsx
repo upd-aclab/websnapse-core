@@ -1,3 +1,4 @@
+import { useAtom, type PrimitiveAtom } from "jotai";
 import { useRef } from "react";
 import Draggable, {
   type DraggableData,
@@ -5,26 +6,25 @@ import Draggable, {
 } from "react-draggable";
 import { InlineMath } from "react-katex";
 import { useXarrow } from "react-xarrows";
-import type Handlers from "~/types/Handlers";
 import type NeuronType from "~/types/Neuron";
-import sameTuple from "~/utils/sameTuple";
 import Rule from "./Rule";
 
 interface Props {
-  data: NeuronType;
-  selected: boolean;
-  handlers: Handlers;
-  selectedRule: [number, number];
+  neuronAtom: PrimitiveAtom<NeuronType>;
 }
 
-const Neuron = ({ data, selected, handlers, selectedRule }: Props) => {
+const Neuron = ({ neuronAtom }: Props) => {
+  const [neuron, setNeuron] = useAtom(neuronAtom);
   const updateXArrow = useXarrow();
   const nodeRef = useRef(null);
 
-  const { id, spikes, label, position, rules, downtime } = data;
+  const { id, spikes, label, position, rules, downtime, selected } = neuron;
 
   const onControlledDrag = (_: DraggableEvent, position: DraggableData) => {
-    handlers.setPosition(id, position);
+    setNeuron((previousNeuron) => ({
+      ...previousNeuron,
+      position,
+    }));
   };
 
   return (
@@ -51,11 +51,7 @@ const Neuron = ({ data, selected, handlers, selectedRule }: Props) => {
         <div className="flex flex-col items-center">
           <InlineMath math={`${spikes}`} />
           {rules.map((rule, index) => (
-            <Rule
-              key={index}
-              data={rule}
-              selected={sameTuple([id, index], selectedRule)}
-            />
+            <Rule key={index} rule={rule} />
           ))}
           <InlineMath math={`${downtime}`} />
         </div>

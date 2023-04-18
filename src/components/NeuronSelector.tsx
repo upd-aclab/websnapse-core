@@ -1,15 +1,16 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { useAtomValue } from "jotai";
 import { InlineMath } from "react-katex";
-import type Handlers from "~/types/Handlers";
-import type Neuron from "~/types/Neuron";
+import { neuronAtomsAtom } from "~/atoms/primitives";
+import NeuronSelectorItem from "./NeuronSelectorItem";
 
 interface Props {
-  neurons: Neuron[];
   label: string;
-  handlers: Handlers;
 }
 
-const NeuronSelector = ({ neurons, label, handlers }: Props) => {
+const NeuronSelector = ({ label }: Props) => {
+  const neuronAtoms = useAtomValue(neuronAtomsAtom);
+
   return (
     <span>
       <DropdownMenu.Root>
@@ -22,21 +23,12 @@ const NeuronSelector = ({ neurons, label, handlers }: Props) => {
             className="flex overflow-hidden rounded-md border border-solid border-lilac bg-white"
           >
             <DropdownMenu.Arrow className="fill-lilac" />
-            {neurons.map(({ id, label }, index) => (
-              <div key={index} className="flex">
-                {index > 0 && (
-                  <DropdownMenu.Separator className="w-[1px] bg-lilac" />
-                )}
-                <DropdownMenu.Item
-                  className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
-                  onClick={() => {
-                    handlers.setNeuron(id);
-                    handlers.setRule([id, 0]);
-                  }}
-                >
-                  <InlineMath math={`${label}`} />
-                </DropdownMenu.Item>
-              </div>
+            {neuronAtoms.map((neuronAtom, index) => (
+              <NeuronSelectorItem
+                key={index}
+                neuronAtom={neuronAtom}
+                index={index}
+              />
             ))}
           </DropdownMenu.Content>
         </DropdownMenu.Portal>

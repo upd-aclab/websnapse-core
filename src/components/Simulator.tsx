@@ -1,17 +1,31 @@
-import type System from "~/types/System";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
+import { simulatingAtom, timeAtom } from "~/atoms/primitives";
 
-interface Props {
-  system: System;
-  time: number;
-  toggleSimulating: () => void;
-}
+const Simulator = () => {
+  const [time, setTime] = useAtom(timeAtom);
+  const [simulating, setSimulating] = useAtom(simulatingAtom);
 
-const Simulator = ({ time, toggleSimulating }: Props) => {
+  useEffect(() => {
+    if (simulating) {
+      const intervalId = setTimeout(() => {
+        setTime((previousTime) => previousTime + 1);
+      }, 1000);
+      return () => clearInterval(intervalId);
+    }
+  });
+
   return (
     <section className="w-full">
       Simulator
       <div>Time: {time}</div>
-      <button onClick={toggleSimulating}>Toggle Timer</button>
+      <button
+        onClick={() =>
+          setSimulating((previousSimulating) => !previousSimulating)
+        }
+      >
+        Toggle Timer
+      </button>
     </section>
   );
 };

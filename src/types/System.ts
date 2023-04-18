@@ -25,6 +25,7 @@ const defaultSystem: System = {
           consumed: 1,
           produced: 0,
           delay: 0,
+          selected: true,
         },
         {
           regex: "a^{2}",
@@ -34,6 +35,7 @@ const defaultSystem: System = {
         },
       ],
       downtime: 0,
+      selected: true,
     },
     {
       id: 2,
@@ -92,6 +94,7 @@ const defaultSystem: System = {
       from: 1,
       to: 2,
       weight: 1,
+      selected: true,
     },
     {
       from: 2,

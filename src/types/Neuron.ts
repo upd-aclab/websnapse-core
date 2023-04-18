@@ -10,6 +10,7 @@ interface Neuron {
   spikes: number;
   rules: Rule[];
   downtime: number;
+  selected?: boolean;
 }
 
 const generateNeuron = (): Neuron => ({
@@ -29,6 +30,7 @@ const generateNeuron = (): Neuron => ({
     },
   ],
   downtime: 0,
+  selected: false,
 });
 
 export default Neuron;

@@ -1,37 +1,25 @@
-import type Handlers from "~/types/Handlers";
-import type Neuron from "~/types/Neuron";
+import { useAtom, useAtomValue, type PrimitiveAtom } from "jotai";
+import { neuronsAtom } from "~/atoms/primitives";
 import type Synapse from "~/types/Synapse";
 import SynapseSelector from "./SynapseSelector";
 
 interface Props {
-  neurons: Neuron[];
-  synapses: Synapse[];
-  synapse: Synapse;
-  fromLabel: string;
-  toLabel: string;
-  handlers: Handlers;
+  synapseAtom: PrimitiveAtom<Synapse>;
 }
 
-const SynapseBuilder = ({
-  neurons,
-  synapses,
-  synapse,
-  fromLabel,
-  toLabel,
-  handlers,
-}: Props) => {
-  const { from, to, weight } = synapse;
+const SynapseBuilder = ({ synapseAtom }: Props) => {
+  const [synapse, setSynapse] = useAtom(synapseAtom);
+  const { from, to, weight, selected } = synapse;
+
+  const neurons = useAtomValue(neuronsAtom);
+  const fromLabel = neurons.find((neuron) => neuron.id === from)!.label;
+  const toLabel = neurons.find((neuron) => neuron.id === to)!.label;
+  const synapseString = `${fromLabel} \\rightarrow ${toLabel}`;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className={`flex flex-col gap-3 ${selected ? "visible" : "hidden"}`}>
       <div>
-        Editing synapse{" "}
-        <SynapseSelector
-          neurons={neurons}
-          synapses={synapses}
-          synapseString={`${fromLabel} \\rightarrow ${toLabel}`}
-          handlers={handlers}
-        />
+        Editing synapse <SynapseSelector synapseString={synapseString} />
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">
@@ -42,7 +30,12 @@ const SynapseBuilder = ({
             value={from}
             placeholder="0"
             min={0}
-            onChange={(e) => handlers.setFrom(parseInt(e.target.value))}
+            onChange={(e) =>
+              setSynapse((previousSynapse) => ({
+                ...previousSynapse,
+                from: parseInt(e.target.value),
+              }))
+            }
             className="w-full rounded-md border border-solid border-lilac px-3 py-1 hover:cursor-not-allowed"
           />
         </label>
@@ -54,7 +47,12 @@ const SynapseBuilder = ({
             value={to}
             placeholder="0"
             min={0}
-            onChange={(e) => handlers.setTo(parseInt(e.target.value))}
+            onChange={(e) =>
+              setSynapse((previousSynapse) => ({
+                ...previousSynapse,
+                to: parseInt(e.target.value),
+              }))
+            }
             className="w-full rounded-md border border-solid border-lilac px-3 py-1 hover:cursor-not-allowed"
           />
         </label>
@@ -65,7 +63,12 @@ const SynapseBuilder = ({
             value={weight}
             placeholder="0"
             min={1}
-            onChange={(e) => handlers.setWeight(parseInt(e.target.value))}
+            onChange={(e) =>
+              setSynapse((previousSynapse) => ({
+                ...previousSynapse,
+                weight: parseInt(e.target.value),
+              }))
+            }
             className="w-full rounded-md border border-solid border-lilac px-3 py-1"
           />
         </label>

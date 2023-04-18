@@ -1,14 +1,14 @@
+import { useAtomValue, type PrimitiveAtom } from "jotai";
 import { InlineMath } from "react-katex";
 import Xarrow from "react-xarrows";
 import type SynapseType from "~/types/Synapse";
 
 interface Props {
-  data: SynapseType;
-  selected: boolean;
+  synapseAtom: PrimitiveAtom<SynapseType>;
 }
 
-const Synapse = ({ data, selected }: Props) => {
-  const { from, to, weight } = data;
+const Synapse = ({ synapseAtom }: Props) => {
+  const { from, to, weight, selected } = useAtomValue(synapseAtom);
 
   return (
     <Xarrow

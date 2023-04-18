@@ -1,41 +1,22 @@
+import { useAtomValue } from "jotai";
 import { Xwrapper } from "react-xarrows";
-import type Handlers from "~/types/Handlers";
-import type Selected from "~/types/Selected";
-import System from "~/types/System";
-import sameTuple from "~/utils/sameTuple";
+import { neuronAtomsAtom, synapseAtomsAtom } from "~/atoms/primitives";
 import Neuron from "./Neuron";
 import Synapse from "./Synapse";
 
-interface Props {
-  handlers: Handlers;
-  system: System;
-  selected: Selected;
-}
-
-const System = ({ handlers, system, selected }: Props) => {
-  const neuronsJSX = system.neurons.map((neuron, index) => (
-    <Neuron
-      key={index}
-      data={neuron}
-      selected={neuron.id === selected.neuron}
-      handlers={handlers}
-      selectedRule={selected.rule}
-    />
-  ));
-
-  const synapsesJSX = system.synapses.map((synapse, index) => (
-    <Synapse
-      key={index}
-      data={synapse}
-      selected={sameTuple([synapse.from, synapse.to], selected.synapse)}
-    />
-  ));
+const System = () => {
+  const neuronAtoms = useAtomValue(neuronAtomsAtom);
+  const synapseAtoms = useAtomValue(synapseAtomsAtom);
 
   return (
     <section className="relative h-auto w-full p-10">
       <Xwrapper>
-        {neuronsJSX}
-        {synapsesJSX}
+        {neuronAtoms.map((neuronAtom, index) => (
+          <Neuron key={index} neuronAtom={neuronAtom} />
+        ))}
+        {synapseAtoms.map((synapseAtom, index) => (
+          <Synapse key={index} synapseAtom={synapseAtom} />
+        ))}
       </Xwrapper>
     </section>
   );

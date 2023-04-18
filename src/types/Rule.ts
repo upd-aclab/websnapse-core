@@ -3,6 +3,7 @@ interface Rule {
   consumed: number;
   produced: number;
   delay: number;
+  selected?: boolean;
 }
 
 const defaultRule: Rule = {

@@ -3,14 +3,13 @@ import type RuleType from "~/types/Rule";
 import getRuleString from "~/utils/getRuleString";
 
 interface Props {
-  data: RuleType;
-  selected: boolean;
+  rule: RuleType;
 }
 
-const Rule = ({ data, selected }: Props) => {
+const Rule = ({ rule }: Props) => {
   return (
-    <span className={`${selected ? "text-blue-500" : "text-black"}`}>
-      <InlineMath math={`${getRuleString(data)}`} />
+    <span className={`${rule.selected ? "text-blue-500" : "text-black"}`}>
+      <InlineMath math={`${getRuleString(rule)}`} />
     </span>
   );
 };

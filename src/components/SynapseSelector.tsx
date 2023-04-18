@@ -1,22 +1,16 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { useAtomValue } from "jotai";
 import { InlineMath } from "react-katex";
-import type Handlers from "~/types/Handlers";
-import type Neuron from "~/types/Neuron";
-import type Synapse from "~/types/Synapse";
+import { synapseAtomsAtom } from "~/atoms/primitives";
+import SynapseSelectorItem from "./SynapseSelectorItem";
 
 interface Props {
-  neurons: Neuron[];
-  synapses: Synapse[];
   synapseString: string;
-  handlers: Handlers;
 }
 
-const SynapseSelector = ({
-  neurons,
-  synapses,
-  synapseString,
-  handlers,
-}: Props) => {
+const SynapseSelector = ({ synapseString }: Props) => {
+  const synapseAtoms = useAtomValue(synapseAtomsAtom);
+
   return (
     <span>
       <DropdownMenu.Root>
@@ -29,25 +23,13 @@ const SynapseSelector = ({
             className="flex flex-col overflow-hidden rounded-md border border-solid border-lilac bg-white"
           >
             <DropdownMenu.Arrow className="fill-lilac" />
-            {synapses.map(({ from, to }, index) => {
-              const fromLabel = neurons.find(
-                (neuron) => neuron.id === from
-              )!.label;
-              const toLabel = neurons.find((neuron) => neuron.id === to)!.label;
-              return (
-                <div key={index}>
-                  {index > 0 && (
-                    <DropdownMenu.Separator className="h-[1px] bg-lilac" />
-                  )}
-                  <DropdownMenu.Item
-                    className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
-                    onClick={() => handlers.setSynapse([from, to])}
-                  >
-                    <InlineMath math={`${fromLabel} \\rightarrow ${toLabel}`} />
-                  </DropdownMenu.Item>
-                </div>
-              );
-            })}
+            {synapseAtoms.map((synapseAtom, index) => (
+              <SynapseSelectorItem
+                key={index}
+                synapseAtom={synapseAtom}
+                index={index}
+              />
+            ))}
           </DropdownMenu.Content>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
