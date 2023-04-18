@@ -18,7 +18,7 @@ const Synapse = ({ synapseAtom }: Props) => {
       color={selected ? "blue" : "black"}
       strokeWidth={2}
       labels={
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
+        <div className="flex p-1 items-center justify-center rounded-full bg-white">
           <InlineMath math={`${weight}`} />
         </div>
       }
