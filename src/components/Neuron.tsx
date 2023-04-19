@@ -5,7 +5,6 @@ import Draggable, {
   type DraggableEvent,
 } from "react-draggable";
 import { InlineMath } from "react-katex";
-import { useXarrow } from "react-xarrows";
 import type NeuronType from "~/types/Neuron";
 import Rule from "./Rule";
 
@@ -15,26 +14,26 @@ interface Props {
 
 const Neuron = ({ neuronAtom }: Props) => {
   const [neuron, setNeuron] = useAtom(neuronAtom);
-  const updateXArrow = useXarrow();
   const nodeRef = useRef(null);
 
   const { id, spikes, label, position, rules, downtime, selected } = neuron;
 
-  const onControlledDrag = (_: DraggableEvent, position: DraggableData) => {
+  const onControlledDrag = (_: DraggableEvent, newPosition: DraggableData) => {
     setNeuron((previousNeuron) => ({
       ...previousNeuron,
-      position,
+      position: {
+        x: newPosition.x,
+        y: newPosition.y,
+      },
     }));
   };
 
   return (
     <Draggable
       position={position}
-      onDrag={(e, position) => {
-        updateXArrow();
-        onControlledDrag(e, position);
+      onDrag={(e, newPosition) => {
+        onControlledDrag(e, newPosition);
       }}
-      onStop={updateXArrow}
       nodeRef={nodeRef}
       bounds="parent"
     >
