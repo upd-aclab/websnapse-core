@@ -1,12 +1,23 @@
 import { useAtomValue } from "jotai";
-import { Xwrapper } from "react-xarrows";
-import { neuronAtomsAtom, synapseAtomsAtom } from "~/atoms/primitives";
+import { useEffect } from "react";
+import { Xwrapper, useXarrow } from "react-xarrows";
+import {
+  neuronAtomsAtom,
+  synapseAtomsAtom,
+  systemAtom,
+} from "~/atoms/primitives";
 import Neuron from "./Neuron";
 import Synapse from "./Synapse";
 
 const System = () => {
+  const system = useAtomValue(systemAtom);
   const neuronAtoms = useAtomValue(neuronAtomsAtom);
   const synapseAtoms = useAtomValue(synapseAtomsAtom);
+  const updateArrow = useXarrow();
+
+  useEffect(() => {
+    updateArrow();
+  }, [system, updateArrow]);
 
   return (
     <section className="relative h-auto w-full p-10">
