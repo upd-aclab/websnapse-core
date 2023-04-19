@@ -41,7 +41,9 @@ const Neuron = ({ neuronAtom }: Props) => {
         ref={nodeRef}
         id={id.toString()}
         className={`${
-          selected ? "text-blue-500 border-blue-500" : "text-black border-black"
+          selected
+            ? "text-[#1c00ff] border-[#1c00ff]"
+            : "text-black border-black"
         } flex w-fit items-center justify-center rounded-md border-2 border-solid bg-white px-3 py-1 hover:cursor-move`}
       >
         <span className="absolute -left-6 -top-6">

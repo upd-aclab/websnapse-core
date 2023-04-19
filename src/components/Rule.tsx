@@ -8,7 +8,7 @@ interface Props {
 
 const Rule = ({ rule }: Props) => {
   return (
-    <span className={`${rule.selected ? "text-blue-500" : "text-black"}`}>
+    <span className={`${rule.selected ? "text-[#1c00ff]" : "text-black"}`}>
       <InlineMath math={`${getRuleString(rule)}`} />
     </span>
   );
