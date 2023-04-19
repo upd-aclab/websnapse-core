@@ -1,14 +1,8 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import {
-  atom,
-  useAtom,
-  useAtomValue,
-  useSetAtom,
-  type PrimitiveAtom,
-} from "jotai";
-import { useMemo } from "react";
+import { useAtom, useAtomValue, useSetAtom, type PrimitiveAtom } from "jotai";
 import { InlineMath } from "react-katex";
-import { neuronsAtom, synapsesAtom } from "~/atoms/primitives";
+import { neuronsAtom } from "~/atoms/primitives";
+import { resetSelectedSynapseAtom } from "~/atoms/resetters";
 import type Synapse from "~/types/Synapse";
 
 interface Props {
@@ -25,19 +19,6 @@ const SynapseSelectorItem = ({ synapseAtom, index }: Props) => {
   const toLabel = neurons.find((neuron) => neuron.id === to)!.label;
   const synapseString = `${fromLabel} \\rightarrow ${toLabel}`;
 
-  const resetSelectedSynapseAtom = useMemo(
-    () =>
-      atom(null, (get, set) =>
-        set(
-          synapsesAtom,
-          get(synapsesAtom).map((synapse) => ({
-            ...synapse,
-            selected: false,
-          }))
-        )
-      ),
-    []
-  );
   const resetSelectedSynapse = useSetAtom(resetSelectedSynapseAtom);
 
   return (

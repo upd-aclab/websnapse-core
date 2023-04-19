@@ -1,8 +1,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { atom, useAtom, useSetAtom, type PrimitiveAtom } from "jotai";
-import { useMemo } from "react";
+import { useAtom, useSetAtom, type PrimitiveAtom } from "jotai";
 import { InlineMath } from "react-katex";
-import { neuronsAtom } from "~/atoms/primitives";
+import { resetSelectedNeuronAtom } from "~/atoms/resetters";
 import type Neuron from "~/types/Neuron";
 
 interface Props {
@@ -12,24 +11,6 @@ interface Props {
 
 const NeuronSelectorItem = ({ neuronAtom, index }: Props) => {
   const [neuron, setNeuron] = useAtom(neuronAtom);
-
-  const resetSelectedNeuronAtom = useMemo(
-    () =>
-      atom(null, (get, set) =>
-        set(
-          neuronsAtom,
-          get(neuronsAtom).map((neuron) => ({
-            ...neuron,
-            rules: neuron.rules.map((rule) => ({
-              ...rule,
-              selected: false,
-            })),
-            selected: false,
-          }))
-        )
-      ),
-    []
-  );
   const resetSelectedNeuron = useSetAtom(resetSelectedNeuronAtom);
 
   return (
