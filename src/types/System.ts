@@ -3,6 +3,7 @@ import type Synapse from "./Synapse";
 import type Terminal from "./Terminal";
 
 interface System {
+  name: string;
   neurons: Neuron[];
   synapses: Synapse[];
   inputNeurons: Terminal[];
@@ -10,6 +11,7 @@ interface System {
 }
 
 const defaultSystem: System = {
+  name: "default",
   neurons: [
     {
       id: 1,

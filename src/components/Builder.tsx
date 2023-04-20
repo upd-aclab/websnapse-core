@@ -88,7 +88,7 @@ const Builder = () => {
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
             JSON.stringify(system, null, 2)
           )}`}
-          download={`download.json`}
+          download={`${system.name}.json`}
           className="hoverable rounded-md px-3 py-1"
         >
           Download
