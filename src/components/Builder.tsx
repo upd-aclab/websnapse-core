@@ -64,25 +64,36 @@ const Builder = () => {
 
   return (
     <section className="text-sm w-full">
-      <div className="flex flex-col gap-3 p-5">
+      <div>
         {neuronAtoms.map((neuronAtom, index) => (
           <NeuronBuilder key={index} neuronAtom={neuronAtom} />
         ))}
       </div>
-      <div className="flex flex-col gap-3 p-5">
+      <div>
         {synapseAtoms.map((synapseAtom, index) => (
           <SynapseBuilder key={index} synapseAtom={synapseAtom} />
         ))}
       </div>
-      <input type="file" accept=".json" onChange={handleFileChange} />
-      <a
-        href={`data:text/json;charset=utf-8,${encodeURIComponent(
-          JSON.stringify(system, null, 2)
-        )}`}
-        download={`download.json`}
-      >
-        Download
-      </a>
+      <div className="p-6 flex gap-6 justify-center items-center">
+        <label className="hoverable rounded-md px-3 py-1">
+          Upload
+          <input
+            type="file"
+            accept=".json"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+        </label>
+        <a
+          href={`data:text/json;charset=utf-8,${encodeURIComponent(
+            JSON.stringify(system, null, 2)
+          )}`}
+          download={`download.json`}
+          className="hoverable rounded-md px-3 py-1"
+        >
+          Download
+        </a>
+      </div>
     </section>
   );
 };

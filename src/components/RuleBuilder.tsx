@@ -36,7 +36,7 @@ const RuleBuilder = ({ neuronAtom, ruleAtom }: Props) => {
           in <InlineMath math={`${neuron.label}`} />
         </div>
         <div
-          className="h-6 w-6 border ml-auto border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
+          className="h-6 w-6 ml-auto hoverable rounded-full flex justify-center items-center text-xl"
           onClick={() => {
             // handlers.addRule();
             // handlers.setRule([neuron.id, neuron.rules.length]);
@@ -44,17 +44,20 @@ const RuleBuilder = ({ neuronAtom, ruleAtom }: Props) => {
         >
           <AiOutlinePlus />
         </div>
-        {neuron.rules.length > 1 && (
-          <div
-            className="h-6 w-6 border ml-2 border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
-            onClick={() => {
+
+        <div
+          className={`h-6 w-6 ml-2 ${
+            neuron.rules.length > 1 ? "hoverable" : "not-hoverable"
+          } rounded-full flex justify-center items-center text-xl`}
+          onClick={() => {
+            if (neuron.rules.length > 1) {
               // const ruleIndex = handlers.deleteRule();
               // handlers.setRule([neuron.id, Math.max(0, ruleIndex - 1)]);
-            }}
-          >
-            <AiOutlineMinus />
-          </div>
-        )}
+            }
+          }}
+        >
+          <AiOutlineMinus />
+        </div>
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">

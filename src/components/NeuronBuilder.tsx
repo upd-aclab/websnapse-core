@@ -23,14 +23,14 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
   const ruleAtoms = useAtomValue(ruleAtomsAtom);
 
   return (
-    <div className={`${selected ? "visible" : "hidden"}`}>
+    <div className={`p-6 ${selected ? "visible" : "hidden"}`}>
       <div className="flex flex-col gap-3">
         <div className="flex items-center">
           <div>
             Editing neuron <NeuronSelector label={label} />
           </div>
           <div
-            className="h-6 w-6 border ml-auto border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
+            className="h-6 w-6 ml-auto hoverable rounded-full flex justify-center items-center text-xl"
             onClick={() => {
               // const newId = handlers.addNeuron();
               // handlers.setNeuron(newId);
@@ -40,7 +40,7 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
             <AiOutlinePlus />
           </div>
           <div
-            className="h-6 w-6 border ml-2 border-solid border-lilac rounded-full hover:cursor-pointer hover:bg-lilac hover:text-white flex justify-center items-center text-xl"
+            className="h-6 w-6 ml-2 hoverable rounded-full flex justify-center items-center text-xl"
             onClick={() => {
               // handlers.deleteNeuron();
               // const newNeuronReference = neurons.find(
@@ -96,7 +96,7 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
           </label>
         </div>
       </div>
-      <div className="flex flex-col gap-3 border-y-2 border-dashed border-lilac py-10 mt-10">
+      <div className="border-t-2 border-dashed border-lilac pt-6 mt-6">
         {ruleAtoms.map((ruleAtom, index) => (
           <RuleBuilder
             key={index}

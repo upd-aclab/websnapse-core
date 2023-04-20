@@ -15,7 +15,7 @@ const ModeSelector = () => {
   ];
 
   return (
-    <div className="flex w-14 flex-col justify-start">
+    <div className="flex w-14 flex-col justify-start text-lilac">
       {modes.map(({ icon }, index) => (
         <div
           className={`cursor-pointer border-b-2 border-r-2 border-solid border-lilac h-14 w-14 ${

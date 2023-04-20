@@ -17,7 +17,11 @@ const SynapseBuilder = ({ synapseAtom }: Props) => {
   const synapseString = `${fromLabel} \\rightarrow ${toLabel}`;
 
   return (
-    <div className={`flex flex-col gap-3 ${selected ? "visible" : "hidden"}`}>
+    <div
+      className={`p-6 border-solid border-y-2 border-lilac flex flex-col gap-3 ${
+        selected ? "visible" : "hidden"
+      }`}
+    >
       <div>
         Editing synapse <SynapseSelector synapseString={synapseString} />
       </div>
