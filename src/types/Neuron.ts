@@ -15,10 +15,10 @@ interface Neuron {
 
 const generateNeuron = (): Neuron => ({
   id: Date.now(),
-  label: String.raw`\verb|<label>|`,
+  label: String.raw`\verb|label|`,
   position: {
-    x: 0,
-    y: 0,
+    x: 838,
+    y: -361,
   },
   spikes: 0,
   rules: [
@@ -27,10 +27,11 @@ const generateNeuron = (): Neuron => ({
       consumed: 1,
       produced: 1,
       delay: 0,
+      selected: true,
     },
   ],
   downtime: 0,
-  selected: false,
+  selected: true,
 });
 
 export default Neuron;
