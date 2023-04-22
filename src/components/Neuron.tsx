@@ -5,10 +5,10 @@ import Draggable, {
   type DraggableEvent,
 } from "react-draggable";
 import { InlineMath } from "react-katex";
+import { useXarrow } from "react-xarrows";
 import { highlightSelectedAtom } from "~/atoms/primitives";
 import type NeuronType from "~/types/Neuron";
 import Rule from "./Rule";
-import { useXarrow } from "react-xarrows";
 
 interface Props {
   neuronAtom: PrimitiveAtom<NeuronType>;
@@ -31,7 +31,7 @@ const Neuron = ({ neuronAtom }: Props) => {
     }));
   };
 
-	useXarrow();
+  useXarrow();
 
   return (
     <Draggable
@@ -51,7 +51,7 @@ const Neuron = ({ neuronAtom }: Props) => {
             : "text-black border-black"
         } flex w-fit items-center justify-center rounded-md border-2 border-solid bg-white px-3 py-1 hover:cursor-move`}
       >
-        <span className="absolute -left-6 -top-6">
+        <span className="absolute -left-7 -top-7 p-1 rounded-full bg-white">
           <InlineMath math={`${label}`} />
         </span>
         <div className="flex flex-col items-center">
