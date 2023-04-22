@@ -103,7 +103,7 @@ const Builder = () => {
         <input
           type="checkbox"
           checked={highlightSelected}
-          onClick={() =>
+          onChange={() =>
             setHighlightSelected(
               (previousHighlightSelected) => !previousHighlightSelected
             )
