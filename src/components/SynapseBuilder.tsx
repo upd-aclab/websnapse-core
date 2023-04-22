@@ -16,6 +16,8 @@ const SynapseBuilder = ({ synapseAtom }: Props) => {
   const toLabel = neurons.find((neuron) => neuron.id === to)!.label;
   const synapseString = `${fromLabel} \\rightarrow ${toLabel}`;
 
+  const weightOk = weight >= 1 && !isNaN(weight);
+
   return (
     <div
       className={`p-6 border-solid border-y-2 border-lilac flex flex-col gap-3 ${
@@ -73,7 +75,9 @@ const SynapseBuilder = ({ synapseAtom }: Props) => {
                 weight: parseInt(e.target.value),
               }))
             }
-            className="w-full rounded-md border border-solid border-lilac px-3 py-1"
+            className={`w-full rounded-md border-2 border-solid px-3 py-1 ${
+              weightOk ? "border-green-600" : "border-red-600"
+            }`}
           />
         </label>
       </div>
