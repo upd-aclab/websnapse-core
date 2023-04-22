@@ -1,10 +1,11 @@
-import { useAtom, type PrimitiveAtom } from "jotai";
+import { useAtom, useAtomValue, type PrimitiveAtom } from "jotai";
 import { useRef } from "react";
 import Draggable, {
   type DraggableData,
   type DraggableEvent,
 } from "react-draggable";
 import { InlineMath } from "react-katex";
+import { highlightSelectedAtom } from "~/atoms/primitives";
 import type NeuronType from "~/types/Neuron";
 import Rule from "./Rule";
 
@@ -14,6 +15,7 @@ interface Props {
 
 const Neuron = ({ neuronAtom }: Props) => {
   const [neuron, setNeuron] = useAtom(neuronAtom);
+  const highlightSelected = useAtomValue(highlightSelectedAtom);
   const nodeRef = useRef(null);
 
   const { id, spikes, label, position, rules, downtime, selected } = neuron;
@@ -41,7 +43,7 @@ const Neuron = ({ neuronAtom }: Props) => {
         ref={nodeRef}
         id={id.toString()}
         className={`${
-          selected
+          highlightSelected && selected
             ? "text-[#1c00ff] border-[#1c00ff]"
             : "text-black border-black"
         } flex w-fit items-center justify-center rounded-md border-2 border-solid bg-white px-3 py-1 hover:cursor-move`}

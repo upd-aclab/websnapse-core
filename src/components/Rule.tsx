@@ -1,4 +1,6 @@
+import { useAtomValue } from "jotai";
 import { InlineMath } from "react-katex";
+import { highlightSelectedAtom } from "~/atoms/primitives";
 import type RuleType from "~/types/Rule";
 import getRuleString from "~/utils/getRuleString";
 
@@ -7,8 +9,14 @@ interface Props {
 }
 
 const Rule = ({ rule }: Props) => {
+  const highlightSelected = useAtomValue(highlightSelectedAtom);
+
   return (
-    <span className={`${rule.selected ? "text-[#1c00ff]" : "text-black"}`}>
+    <span
+      className={`${
+        highlightSelected && rule.selected ? "text-[#1c00ff]" : "text-black"
+      }`}
+    >
       <InlineMath math={`${getRuleString(rule)}`} />
     </span>
   );

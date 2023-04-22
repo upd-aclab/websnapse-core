@@ -1,6 +1,7 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState, type ChangeEvent } from "react";
 import {
+  highlightSelectedAtom,
   neuronAtomsAtom,
   neuronsAtom,
   synapseAtomsAtom,
@@ -22,6 +23,10 @@ const Builder = () => {
   const setSynapses = useSetAtom(synapsesAtom);
 
   const [file, setFile] = useState<File>();
+
+  const [highlightSelected, setHighlightSelected] = useAtom(
+    highlightSelectedAtom
+  );
 
   useEffect(() => {
     if (file) {
@@ -94,6 +99,18 @@ const Builder = () => {
           Download
         </a>
       </div>
+      <label className="flex justify-center items-center gap-3">
+        <input
+          type="checkbox"
+          checked={highlightSelected}
+          onClick={() =>
+            setHighlightSelected(
+              (previousHighlightSelected) => !previousHighlightSelected
+            )
+          }
+        />
+        Highlight selected components
+      </label>
     </section>
   );
 };

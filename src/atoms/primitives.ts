@@ -19,6 +19,7 @@ const synapseAtomsAtom = splitAtom(synapsesAtom);
 const inputNeuronAtomsAtom = splitAtom(inputNeuronsAtom);
 const outputNeuronAtomsAtom = splitAtom(outputNeuronsAtom);
 
+const highlightSelectedAtom = atom(true);
 const modeAtom = atom(0);
 const timeAtom = atom(0);
 const simulatingAtom = atom(false);
@@ -33,6 +34,7 @@ export {
   synapseAtomsAtom,
   inputNeuronAtomsAtom,
   outputNeuronAtomsAtom,
+	highlightSelectedAtom,
   modeAtom,
   timeAtom,
   simulatingAtom,
