@@ -3,8 +3,13 @@ import { focusAtom } from "jotai-optics";
 import { splitAtom } from "jotai/utils";
 import { useMemo } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { nudgeNeuronsAtom, resetSelectedNeuronAtom } from "~/atoms/actions";
-import { neuronsAtom } from "~/atoms/primitives";
+import {
+  nudgeNeuronsAtom,
+  resetSelectedNeuronAtom,
+  resetSelectedSynapseAtom,
+  selectFirstAtom,
+} from "~/atoms/actions";
+import { neuronsAtom, synapsesAtom } from "~/atoms/primitives";
 import type Neuron from "~/types/Neuron";
 import { generateNeuron } from "~/types/Neuron";
 import NeuronSelector from "./NeuronSelector";
@@ -16,10 +21,13 @@ interface Props {
 
 const NeuronBuilder = ({ neuronAtom }: Props) => {
   const [neuron, setNeuron] = useAtom(neuronAtom);
-  const { label, spikes, selected } = neuron;
+  const { id, label, spikes, selected } = neuron;
 
-  const setNeurons = useSetAtom(neuronsAtom);
+  const [neurons, setNeurons] = useAtom(neuronsAtom);
+  const [synapses, setSynapses] = useAtom(synapsesAtom);
   const resetSelectedNeuron = useSetAtom(resetSelectedNeuronAtom);
+  const resetSelectedSynapse = useSetAtom(resetSelectedSynapseAtom);
+  const selectFirst = useSetAtom(selectFirstAtom);
   const nudgeNeurons = useSetAtom(nudgeNeuronsAtom);
 
   const rulesAtom = useMemo(
@@ -53,23 +61,34 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
             <AiOutlinePlus />
           </div>
           <div
-            className="h-6 w-6 ml-2 hoverable rounded-full flex justify-center items-center text-xl"
+            className={`h-6 w-6 ml-2 ${
+              neurons.length > 1 ? "hoverable" : "not-hoverable"
+            } rounded-full flex justify-center items-center text-xl`}
             onClick={() => {
-              // handlers.deleteNeuron();
-              // const newNeuronReference = neurons.find(
-              //   (neuron) => neuron.id !== id
-              // )!;
-              // handlers.setNeuron(newNeuronReference.id);
-              // handlers.setRule([newNeuronReference.id, 0]);
-              // const newSynapseReference = synapses.find(
-              //   ({ from, to }) => from !== id && to !== id
-              // )!;
-              // if (synapse.from === id || synapse.to === id) {
-              //   handlers.setSynapse([
-              //     newSynapseReference.from,
-              //     newSynapseReference.to,
-              //   ]);
-              // }
+              setSynapses((previousSynapses) =>
+                previousSynapses.filter(
+                  ({ from, to }) => from !== id && to !== id
+                )
+              );
+              setNeurons((previousNeurons) =>
+                previousNeurons.filter((neuron) => !neuron.selected)
+              );
+              resetSelectedNeuron();
+              selectFirst();
+              const resetSynapse = synapses.some(
+                (synapse) =>
+                  synapse.selected && (synapse.from === id || synapse.to === id)
+              );
+              if (resetSynapse) {
+                resetSelectedSynapse();
+                setSynapses((previousSynapses) =>
+                  previousSynapses.map((synapse, index) => ({
+                    ...synapse,
+                    selected: index === 0,
+                  }))
+                );
+              }
+              nudgeNeurons();
             }}
           >
             <AiOutlineMinus />

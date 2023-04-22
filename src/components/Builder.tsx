@@ -1,6 +1,6 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState, type ChangeEvent } from "react";
-import { resetSelectedNeuronAtom } from "~/atoms/actions";
+import { resetSelectedNeuronAtom, selectFirstAtom } from "~/atoms/actions";
 import {
   cleanSystemAtom,
   highlightSelectedAtom,
@@ -21,6 +21,7 @@ const Builder = () => {
   const synapseAtoms = useAtomValue(synapseAtomsAtom);
 
   const resetSelectedNeuron = useSetAtom(resetSelectedNeuronAtom);
+  const selectFirst = useSetAtom(selectFirstAtom);
   const setNeurons = useSetAtom(neuronsAtom);
   const setSynapses = useSetAtom(synapsesAtom);
 
@@ -41,16 +42,7 @@ const Builder = () => {
         ) {
           setSystem(JSON.parse(e.target.result) as System);
           resetSelectedNeuron();
-          setNeurons((previousNeurons) =>
-            previousNeurons.map((neuron, neuronIndex) => ({
-              ...neuron,
-              rules: neuron.rules.map((rule, ruleIndex) => ({
-                ...rule,
-                selected: neuronIndex === 0 && ruleIndex === 0,
-              })),
-              selected: neuronIndex === 0,
-            }))
-          );
+          selectFirst();
           setSynapses((previousSynapses) =>
             previousSynapses.map((synapse, index) => ({
               ...synapse,
@@ -61,7 +53,14 @@ const Builder = () => {
       };
       reader.readAsText(file, "utf-8");
     }
-  }, [file, setSystem, resetSelectedNeuron, setNeurons, setSynapses]);
+  }, [
+    file,
+    setSystem,
+    resetSelectedNeuron,
+    setNeurons,
+    setSynapses,
+    selectFirst,
+  ]);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {

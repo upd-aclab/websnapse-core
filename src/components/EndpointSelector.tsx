@@ -32,10 +32,18 @@ const EndpointSelector = ({ synapseAtom, label, choosingFrom }: Props) => {
     existing.add(from);
   }
 
+  const disabled =
+    neurons.filter((neuron) => !existing.has(neuron.id)).length == 0;
+
   return (
     <div className="w-full">
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="w-full text-left h-8 rounded-md border border-solid border-lilac px-3 py-1">
+        <DropdownMenu.Trigger
+          className={`w-full text-left h-8 rounded-md border border-solid border-lilac px-3 py-1 ${
+            disabled ? "bg-gray-600/10" : ""
+          }`}
+          disabled={disabled}
+        >
           <InlineMath math={`${label}`} />
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
