@@ -1,8 +1,10 @@
-import { useAtom, useAtomValue, type PrimitiveAtom } from "jotai";
+import { useAtom, useSetAtom, type PrimitiveAtom } from "jotai";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { InlineMath } from "react-katex";
+import { resetSelectedRuleAtom } from "~/atoms/resetters";
 import type Neuron from "~/types/Neuron";
 import type Rule from "~/types/Rule";
+import { defaultRule } from "~/types/Rule";
 import getRuleString from "~/utils/getRuleString";
 import RuleSelector from "./RuleSelector";
 
@@ -12,8 +14,9 @@ interface Props {
 }
 
 const RuleBuilder = ({ neuronAtom, ruleAtom }: Props) => {
-  const neuron = useAtomValue(neuronAtom);
+  const [neuron, setNeuron] = useAtom(neuronAtom);
   const [rule, setRule] = useAtom(ruleAtom);
+  const resetSelectedRule = useSetAtom(resetSelectedRuleAtom);
   const { regex, consumed, produced, delay, selected } = rule;
 
   const regexOk = regex.length > 0;
@@ -38,8 +41,14 @@ const RuleBuilder = ({ neuronAtom, ruleAtom }: Props) => {
         <div
           className="h-6 w-6 ml-auto hoverable rounded-full flex justify-center items-center text-xl"
           onClick={() => {
-            // handlers.addRule();
-            // handlers.setRule([neuron.id, neuron.rules.length]);
+            resetSelectedRule(neuronAtom);
+            setNeuron((previousNeuron) => ({
+              ...previousNeuron,
+              rules: [
+                ...previousNeuron.rules,
+                { ...defaultRule, selected: true },
+              ],
+            }));
           }}
         >
           <AiOutlinePlus />
