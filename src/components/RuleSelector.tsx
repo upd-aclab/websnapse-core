@@ -29,7 +29,7 @@ const RuleSelector = ({ neuronAtom, ruleString }: Props) => {
         <DropdownMenu.Portal>
           <DropdownMenu.Content
             sideOffset={5}
-            className="flex flex-col overflow-hidden rounded-md border border-solid border-lilac bg-white"
+            className="flex flex-col items-center overflow-hidden rounded-md border border-solid border-lilac bg-white"
           >
             <DropdownMenu.Arrow className="fill-lilac" />
             {ruleAtoms.map((ruleAtom, index) => (
