@@ -21,7 +21,7 @@ const EndpointSelectorItem = ({
   const setSynapse = useSetAtom(synapseAtom);
 
   return (
-    <div className="flex w-full">
+    <div className="flex">
       {index > 0 && <DropdownMenu.Separator className="w-[1px] bg-lilac" />}
       <DropdownMenu.Item
         className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"

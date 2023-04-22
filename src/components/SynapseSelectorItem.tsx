@@ -22,10 +22,10 @@ const SynapseSelectorItem = ({ synapseAtom, index }: Props) => {
   const resetSelectedSynapse = useSetAtom(resetSelectedSynapseAtom);
 
   return (
-    <div key={index}>
+    <div className="w-full">
       {index > 0 && <DropdownMenu.Separator className="h-[1px] bg-lilac" />}
       <DropdownMenu.Item
-        className="select-none px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
+        className="select-none flex justify-center px-2 py-1 outline-0 hover:cursor-pointer hover:bg-lilac hover:text-white"
         onClick={() => {
           resetSelectedSynapse();
           setSynapse((previousSynapse) => ({
