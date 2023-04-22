@@ -1,5 +1,6 @@
 import { useAtom, useAtomValue, type PrimitiveAtom } from "jotai";
-import { neuronsAtom } from "~/atoms/primitives";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { neuronsAtom, synapsesAtom } from "~/atoms/primitives";
 import type Synapse from "~/types/Synapse";
 import EndpointSelector from "./EndpointSelector";
 import SynapseSelector from "./SynapseSelector";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const SynapseBuilder = ({ synapseAtom }: Props) => {
+  const [synapses, setSynapses] = useAtom(synapsesAtom);
   const [synapse, setSynapse] = useAtom(synapseAtom);
   const { from, to, weight, selected } = synapse;
 
@@ -25,8 +27,45 @@ const SynapseBuilder = ({ synapseAtom }: Props) => {
         selected ? "visible" : "hidden"
       }`}
     >
-      <div>
-        Editing synapse <SynapseSelector synapseString={synapseString} />
+      <div className="flex items-center">
+        <div>
+          Editing synapse <SynapseSelector synapseString={synapseString} />
+        </div>
+        <div
+          className="h-6 w-6 ml-auto hoverable rounded-full flex justify-center items-center text-xl"
+          onClick={() => {
+            // resetSelectedRule(neuronAtom);
+            // setNeuron((previousNeuron) => ({
+            //   ...previousNeuron,
+            //   rules: [
+            //     ...previousNeuron.rules,
+            //     { ...defaultRule, selected: true },
+            //   ],
+            // }));
+            // nudgeNeurons();
+          }}
+        >
+          <AiOutlinePlus />
+        </div>
+        <div
+          className={`h-6 w-6 ml-2 ${
+            synapses.length > 1 ? "hoverable" : "not-hoverable"
+          } rounded-full flex justify-center items-center text-xl`}
+          onClick={() => {
+            if (synapses.length > 1) {
+              setSynapses((previousSynapses) =>
+                previousSynapses
+                  .filter((synapse) => !synapse.selected)
+                  .map((synapse, index) => ({
+                    ...synapse,
+                    selected: index === 0,
+                  }))
+              );
+            }
+          }}
+        >
+          <AiOutlineMinus />
+        </div>
       </div>
       <div className="flex flex-col gap-3">
         <label className="flex items-center">
