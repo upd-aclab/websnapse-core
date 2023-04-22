@@ -1,3 +1,4 @@
+import manualStructuredClone from "@ungap/structured-clone";
 import { atom } from "jotai";
 import { focusAtom } from "jotai-optics";
 import { splitAtom } from "jotai/utils";
@@ -25,7 +26,7 @@ const timeAtom = atom(0);
 const simulatingAtom = atom(false);
 
 const cleanSystemAtom = atom((get) => {
-  const system = structuredClone(get(systemAtom));
+  const system = manualStructuredClone(get(systemAtom));
   for (const synapse of system.synapses) {
     if (Object.hasOwn(synapse, "selected")) {
       delete synapse["selected"];
