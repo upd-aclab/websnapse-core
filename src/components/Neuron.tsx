@@ -44,7 +44,7 @@ const Neuron = ({ neuronAtom }: Props) => {
         id={id.toString()}
         className={`${
           highlightSelected && selected
-            ? "text-[#1c00ff] border-[#1c00ff]"
+            ? "text-navyblue border-navyblue"
             : "text-black border-black"
         } flex w-fit items-center justify-center rounded-md border-2 border-solid bg-white px-3 py-1 hover:cursor-move`}
       >

@@ -22,7 +22,7 @@ const Synapse = ({ synapseAtom }: Props) => {
       labels={
         <div
           className={`flex p-1 items-center justify-center rounded-full bg-white ${
-            highlightSelected && selected ? "text-[#1c00ff]" : "text-black"
+            highlightSelected && selected ? "text-navyblue" : "text-black"
           }`}
         >
           <InlineMath math={`${weight}`} />

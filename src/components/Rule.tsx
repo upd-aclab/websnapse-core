@@ -14,7 +14,7 @@ const Rule = ({ rule }: Props) => {
   return (
     <span
       className={`${
-        highlightSelected && rule.selected ? "text-[#1c00ff]" : "text-black"
+        highlightSelected && rule.selected ? "text-navyblue" : "text-black"
       }`}
     >
       <InlineMath math={`${getRuleString(rule)}`} />

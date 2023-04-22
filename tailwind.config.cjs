@@ -8,6 +8,7 @@ const config = {
     extend: {
       colors: {
         lilac: "#786ea6",
+        navyblue: "#1c00ff",
       },
     },
   },
