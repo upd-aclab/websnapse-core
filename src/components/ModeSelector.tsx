@@ -19,7 +19,7 @@ const ModeSelector = () => {
       {modes.map(({ icon }, index) => (
         <div
           className={`cursor-pointer border-b-2 border-r-2 border-solid border-lilac h-14 w-14 ${
-            index === modes.length - 1 ? "rounded-br-lg" : ""
+            index === modes.length - 1 ? "rounded-br-xl" : ""
           } ${mode !== index ? "hover:bg-lilac hover:text-white" : ""}`}
           key={index}
         >
