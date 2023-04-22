@@ -34,7 +34,7 @@ export {
   synapseAtomsAtom,
   inputNeuronAtomsAtom,
   outputNeuronAtomsAtom,
-	highlightSelectedAtom,
+  highlightSelectedAtom,
   modeAtom,
   timeAtom,
   simulatingAtom,

@@ -99,7 +99,7 @@ const Builder = () => {
           Download
         </a>
       </div>
-      <label className="flex justify-center items-center gap-3">
+      <label className="flex justify-center hover:cursor-pointer items-center gap-3">
         <input
           type="checkbox"
           checked={highlightSelected}
