@@ -1,6 +1,7 @@
 import { useAtom, useAtomValue, type PrimitiveAtom } from "jotai";
 import { neuronsAtom } from "~/atoms/primitives";
 import type Synapse from "~/types/Synapse";
+import EndpointSelector from "./EndpointSelector";
 import SynapseSelector from "./SynapseSelector";
 
 interface Props {
@@ -30,36 +31,18 @@ const SynapseBuilder = ({ synapseAtom }: Props) => {
       <div className="flex flex-col gap-3">
         <label className="flex items-center">
           <p className="w-36">From</p>
-          <input
-            disabled
-            type="number"
-            value={from}
-            placeholder="0"
-            min={0}
-            onChange={(e) =>
-              setSynapse((previousSynapse) => ({
-                ...previousSynapse,
-                from: parseInt(e.target.value),
-              }))
-            }
-            className="w-full rounded-md border border-solid border-lilac px-3 py-1 hover:cursor-not-allowed"
+          <EndpointSelector
+            synapseAtom={synapseAtom}
+            label={fromLabel}
+            choosingFrom={true}
           />
         </label>
         <label className="flex items-center">
           <p className="w-36">To</p>
-          <input
-            disabled
-            type="number"
-            value={to}
-            placeholder="0"
-            min={0}
-            onChange={(e) =>
-              setSynapse((previousSynapse) => ({
-                ...previousSynapse,
-                to: parseInt(e.target.value),
-              }))
-            }
-            className="w-full rounded-md border border-solid border-lilac px-3 py-1 hover:cursor-not-allowed"
+          <EndpointSelector
+            synapseAtom={synapseAtom}
+            label={toLabel}
+            choosingFrom={false}
           />
         </label>
         <label className="flex items-center">
