@@ -53,15 +53,28 @@ const RuleBuilder = ({ neuronAtom, ruleAtom }: Props) => {
         >
           <AiOutlinePlus />
         </div>
-
         <div
           className={`h-6 w-6 ml-2 ${
             neuron.rules.length > 1 ? "hoverable" : "not-hoverable"
           } rounded-full flex justify-center items-center text-xl`}
           onClick={() => {
             if (neuron.rules.length > 1) {
-              // const ruleIndex = handlers.deleteRule();
-              // handlers.setRule([neuron.id, Math.max(0, ruleIndex - 1)]);
+              let i = 0;
+              for (let j = 0; j < neuron.rules.length; ++j) {
+                if (neuron.rules[j]?.selected) {
+                  i = j;
+                }
+              }
+              i = Math.min(i, neuron.rules.length - 2);
+              setNeuron((previousNeuron) => ({
+                ...previousNeuron,
+                rules: previousNeuron.rules
+                  .filter((rule) => !rule.selected)
+                  .map((rule, index) => ({
+                    ...rule,
+                    selected: i === index,
+                  })),
+              }));
             }
           }}
         >
