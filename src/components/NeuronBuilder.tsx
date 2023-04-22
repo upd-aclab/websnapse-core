@@ -1,9 +1,12 @@
-import { useAtom, useAtomValue, type PrimitiveAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom, type PrimitiveAtom } from "jotai";
 import { focusAtom } from "jotai-optics";
 import { splitAtom } from "jotai/utils";
 import { useMemo } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { nudgeNeuronsAtom, resetSelectedNeuronAtom } from "~/atoms/actions";
+import { neuronsAtom } from "~/atoms/primitives";
 import type Neuron from "~/types/Neuron";
+import { generateNeuron } from "~/types/Neuron";
 import NeuronSelector from "./NeuronSelector";
 import RuleBuilder from "./RuleBuilder";
 
@@ -14,6 +17,10 @@ interface Props {
 const NeuronBuilder = ({ neuronAtom }: Props) => {
   const [neuron, setNeuron] = useAtom(neuronAtom);
   const { label, spikes, selected } = neuron;
+
+  const setNeurons = useSetAtom(neuronsAtom);
+  const resetSelectedNeuron = useSetAtom(resetSelectedNeuronAtom);
+  const nudgeNeurons = useSetAtom(nudgeNeuronsAtom);
 
   const rulesAtom = useMemo(
     () => focusAtom(neuronAtom, (optic) => optic.prop("rules")),
@@ -32,9 +39,12 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
           <div
             className="h-6 w-6 ml-auto hoverable rounded-full flex justify-center items-center text-xl"
             onClick={() => {
-              // const newId = handlers.addNeuron();
-              // handlers.setNeuron(newId);
-              // handlers.setRule([newId, 0]);
+              resetSelectedNeuron();
+              setNeurons((previousNeurons) => [
+                ...previousNeurons,
+                generateNeuron(),
+              ]);
+							nudgeNeurons();
             }}
           >
             <AiOutlinePlus />

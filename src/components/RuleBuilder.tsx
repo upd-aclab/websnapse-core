@@ -1,7 +1,7 @@
 import { useAtom, useSetAtom, type PrimitiveAtom } from "jotai";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { InlineMath } from "react-katex";
-import { resetSelectedRuleAtom } from "~/atoms/resetters";
+import { nudgeNeuronsAtom, resetSelectedRuleAtom } from "~/atoms/actions";
 import type Neuron from "~/types/Neuron";
 import type Rule from "~/types/Rule";
 import { defaultRule } from "~/types/Rule";
@@ -27,6 +27,8 @@ const RuleBuilder = ({ neuronAtom, ruleAtom }: Props) => {
   const producedOk = consumed >= produced && !isNaN(produced);
   const delayOk = !isNaN(delay);
 
+  const nudgeNeurons = useSetAtom(nudgeNeuronsAtom);
+
   return (
     <div className={`flex flex-col gap-3 ${selected ? "visible" : "hidden"}`}>
       <div className="flex items-center">
@@ -49,6 +51,7 @@ const RuleBuilder = ({ neuronAtom, ruleAtom }: Props) => {
                 { ...defaultRule, selected: true },
               ],
             }));
+            nudgeNeurons();
           }}
         >
           <AiOutlinePlus />
@@ -75,6 +78,7 @@ const RuleBuilder = ({ neuronAtom, ruleAtom }: Props) => {
                     selected: i === index,
                   })),
               }));
+              nudgeNeurons();
             }
           }}
         >

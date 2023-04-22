@@ -1,22 +1,22 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState, type ChangeEvent } from "react";
+import { resetSelectedNeuronAtom } from "~/atoms/actions";
 import {
   highlightSelectedAtom,
   neuronAtomsAtom,
   neuronsAtom,
-  noSelectedAtom,
+  cleanSystemAtom,
   synapseAtomsAtom,
   synapsesAtom,
   systemAtom,
 } from "~/atoms/primitives";
-import { resetSelectedNeuronAtom } from "~/atoms/resetters";
 import type System from "~/types/System";
 import NeuronBuilder from "./NeuronBuilder";
 import SynapseBuilder from "./SynapseBuilder";
 
 const Builder = () => {
   const [system, setSystem] = useAtom(systemAtom);
-  const rawSystem = useAtomValue(noSelectedAtom);
+  const cleanSystem = useAtomValue(cleanSystemAtom);
   const neuronAtoms = useAtomValue(neuronAtomsAtom);
   const synapseAtoms = useAtomValue(synapseAtomsAtom);
 
@@ -93,7 +93,7 @@ const Builder = () => {
         </label>
         <a
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
-            JSON.stringify(rawSystem, null, 2)
+            JSON.stringify(cleanSystem, null, 2)
           )}`}
           download={`${system.name}.json`}
           className="hoverable rounded-md px-3 py-1"

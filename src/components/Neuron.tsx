@@ -8,6 +8,7 @@ import { InlineMath } from "react-katex";
 import { highlightSelectedAtom } from "~/atoms/primitives";
 import type NeuronType from "~/types/Neuron";
 import Rule from "./Rule";
+import { useXarrow } from "react-xarrows";
 
 interface Props {
   neuronAtom: PrimitiveAtom<NeuronType>;
@@ -29,6 +30,8 @@ const Neuron = ({ neuronAtom }: Props) => {
       },
     }));
   };
+
+	useXarrow();
 
   return (
     <Draggable

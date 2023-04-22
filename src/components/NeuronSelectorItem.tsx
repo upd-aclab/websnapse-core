@@ -1,7 +1,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useAtom, useSetAtom, type PrimitiveAtom } from "jotai";
 import { InlineMath } from "react-katex";
-import { resetSelectedNeuronAtom } from "~/atoms/resetters";
+import { resetSelectedNeuronAtom } from "~/atoms/actions";
 import type Neuron from "~/types/Neuron";
 
 interface Props {
