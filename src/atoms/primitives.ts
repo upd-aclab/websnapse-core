@@ -24,6 +24,26 @@ const modeAtom = atom(0);
 const timeAtom = atom(0);
 const simulatingAtom = atom(false);
 
+const noSelectedAtom = atom((get) => {
+  const system = structuredClone(get(systemAtom));
+  for (const synapse of system.synapses) {
+    if (Object.hasOwn(synapse, "selected")) {
+      delete synapse["selected"];
+    }
+  }
+  system.neurons.forEach((neuron) => {
+    neuron.rules.forEach((rule) => {
+      if (Object.hasOwn(rule, "selected")) {
+        delete rule["selected"];
+      }
+    });
+    if (Object.hasOwn(neuron, "selected")) {
+      delete neuron["selected"];
+    }
+  });
+  return system;
+});
+
 export {
   systemAtom,
   neuronsAtom,
@@ -38,4 +58,5 @@ export {
   modeAtom,
   timeAtom,
   simulatingAtom,
+  noSelectedAtom,
 };

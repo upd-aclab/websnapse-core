@@ -4,6 +4,7 @@ import {
   highlightSelectedAtom,
   neuronAtomsAtom,
   neuronsAtom,
+  noSelectedAtom,
   synapseAtomsAtom,
   synapsesAtom,
   systemAtom,
@@ -15,6 +16,7 @@ import SynapseBuilder from "./SynapseBuilder";
 
 const Builder = () => {
   const [system, setSystem] = useAtom(systemAtom);
+  const rawSystem = useAtomValue(noSelectedAtom);
   const neuronAtoms = useAtomValue(neuronAtomsAtom);
   const synapseAtoms = useAtomValue(synapseAtomsAtom);
 
@@ -91,7 +93,7 @@ const Builder = () => {
         </label>
         <a
           href={`data:text/json;charset=utf-8,${encodeURIComponent(
-            JSON.stringify(system, null, 2)
+            JSON.stringify(rawSystem, null, 2)
           )}`}
           download={`${system.name}.json`}
           className="hoverable rounded-md px-3 py-1"
