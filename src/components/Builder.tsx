@@ -2,10 +2,10 @@ import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState, type ChangeEvent } from "react";
 import { resetSelectedNeuronAtom } from "~/atoms/actions";
 import {
+  cleanSystemAtom,
   highlightSelectedAtom,
   neuronAtomsAtom,
   neuronsAtom,
-  cleanSystemAtom,
   synapseAtomsAtom,
   synapsesAtom,
   systemAtom,

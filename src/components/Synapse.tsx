@@ -12,7 +12,7 @@ const Synapse = ({ synapseAtom }: Props) => {
   const { from, to, weight, selected } = useAtomValue(synapseAtom);
   const highlightSelected = useAtomValue(highlightSelectedAtom);
 
-	useXarrow();
+  useXarrow();
 
   return (
     <Xarrow
