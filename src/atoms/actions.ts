@@ -38,8 +38,22 @@ const resetSelectedSynapseAtom = atom(null, (get, set) =>
   )
 );
 
+const nudgeNeuronsAtom = atom(null, (get, set) =>
+  set(
+    neuronsAtom,
+    get(neuronsAtom).map((neuron) => ({
+      ...neuron,
+      position: {
+        x: neuron.position.x + 0.0001,
+        y: neuron.position.y + 0.0001,
+      },
+    }))
+  )
+);
+
 export {
   resetSelectedRuleAtom,
   resetSelectedNeuronAtom,
   resetSelectedSynapseAtom,
+  nudgeNeuronsAtom,
 };
