@@ -29,6 +29,9 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
   const ruleAtomsAtom = splitAtom(rulesAtom);
   const ruleAtoms = useAtomValue(ruleAtomsAtom);
 
+  const labelOk = label.length > 0;
+  const spikesOk = spikes >= 0 && !isNaN(spikes);
+
   return (
     <div className={`p-6 ${selected ? "visible" : "hidden"}`}>
       <div className="flex flex-col gap-3">
@@ -44,7 +47,7 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
                 ...previousNeurons,
                 generateNeuron(),
               ]);
-							nudgeNeurons();
+              nudgeNeurons();
             }}
           >
             <AiOutlinePlus />
@@ -85,7 +88,9 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
                   label: e.target.value,
                 }));
               }}
-              className="w-full rounded-md border border-solid border-lilac px-3 py-1"
+              className={`w-full rounded-md border-2 border-solid px-3 py-1 ${
+                labelOk ? "border-green-600" : "border-red-600"
+              }`}
             />
           </label>
           <label className="flex items-center">
@@ -101,7 +106,9 @@ const NeuronBuilder = ({ neuronAtom }: Props) => {
                   spikes: parseInt(e.target.value),
                 }))
               }
-              className="w-full rounded-md border border-solid border-lilac px-3 py-1"
+              className={`w-full rounded-md border-2 border-solid px-3 py-1 ${
+                spikesOk ? "border-green-600" : "border-red-600"
+              }`}
             />
           </label>
         </div>
