@@ -32,31 +32,40 @@ The project is in a stage where emphasizing UI, UX, and DX becomes paramount, an
 
 ## Relevant Links
 
-- [WebSnapse v1](https://github.com/chinadupaya/WebSnapse), by Annysia & Anica
+- WebSnapse v1, by Annysia & Anica
 
+  - [GitHub repo](https://github.com/chinadupaya/WebSnapse)
   - [page](https://chinadupaya.github.io/WebSnapse/#/)
   - paper in page 264 of [ICMC 2021](https://konferencia.unideb.hu/sites/default/files/upload_documents/icmc-2021-proceedings-august-2021.pdf)
 
-- [WebSnapse v2](https://github.com/nccruel/websnapse_extended), by Nathaniel & Coleen
+- WebSnapse v2, by Nathaniel & Coleen
 
+  - [GitHub repo](https://github.com/nccruel/websnapse_extended)
   - [page](https://nccruel.github.io/websnapse_extended/#/)
   - paper in page 147 of [ACMC 2022](https://drive.google.com/file/d/1LYCBeGTFf3X5UOzJSSBcmqBgstJYAg5a/view)
 
-- [WebSnapse Reloaded](https://github.com/websnapse), by Jarred & Mutya
+- WebSnapse Reloaded, by Jarred & Mutya
 
+  - [GitHub org](https://github.com/websnapse)
   - [page](https://websnapse.github.io/)
 
-- [WebSnapse + WebAssembly](https://github.com/lmgal/websnapse-v3), by Louie & Sotto
+- WebSnapse + WebAssembly, by Louie & Sotto
 
-- [WebSnapse + Numerical SN P systems (1)](https://github.com/CS199-Instrella-Vidad), by Reannu & John David
+  - [GitHub repo](https://github.com/lmgal/websnapse-v3)
 
+- WebSnapse + Numerical SN P systems (1), by Reannu & John David
+
+  - [GitHub org](https://github.com/CS199-Instrella-Vidad)
   - [landing page](https://snapse.website/)
   - [SN P page](https://snp.snapse.website/)
   - [NSN P page](https://nsnp.snapse.website/)
 
-- [WebSnapse + Numerical SN P systems (2)](https://github.com/numerical-websnapse), by Rey &
+- WebSnapse + Numerical SN P systems (2), by Rey &
 
-- [WebSnapse + Homogenization](https://github.com/pyTimK/Homogeneous-Algorithm-for-SN-P-System/tree/main), by Tim & Joshua
+  - [GitHub org](https://github.com/numerical-websnapse)
 
+- WebSnapse + Homogenization, by Tim & Joshua
+
+  - [GitHub repo](https://github.com/pyTimK/Homogeneous-Algorithm-for-SN-P-System/tree/main)
   - [page](https://websnapse-homogenize.netlify.app/)
   - [API](https://homogenize.fly.dev/)
