@@ -52,6 +52,7 @@ The project is in a stage where emphasizing UI, UX, and DX becomes paramount, an
 - WebSnapse + WebAssembly, by Louie & Sotto
 
   - [GitHub repo](https://github.com/lmgal/websnapse-v3)
+  - [page](https://websnapse-v3.netlify.app/)
 
 - WebSnapse + Numerical SN P systems (1), by Reannu & John David
 
