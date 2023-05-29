@@ -27,13 +27,8 @@ The project is in a stage where emphasizing UI, UX, and DX becomes paramount, an
   - Vitest
   - Playwright
 
-- Backend?
-
-  - file uploads/downloads
-  - database for community-contributed samples
-
 - Deployment
-  - in Vercel we trust
+  - Netlify
 
 ## Relevant Links
 
@@ -47,11 +42,11 @@ The project is in a stage where emphasizing UI, UX, and DX becomes paramount, an
   - [page](https://nccruel.github.io/websnapse_extended/#/)
   - paper in page 147 of [ACMC 2022](https://drive.google.com/file/d/1LYCBeGTFf3X5UOzJSSBcmqBgstJYAg5a/view)
 
-- [WebSnapse Reloaded](https://github.com/websnapse), by Mutya &
+- [WebSnapse Reloaded](https://github.com/websnapse), by Jarred & Mutya
 
   - [page](https://websnapse.github.io/)
 
-- [WebSnapse + WebAssembly](https://github.com/lmgal/websnapse-v3), by Louie &
+- [WebSnapse + WebAssembly](https://github.com/lmgal/websnapse-v3), by Louie & Sotto
 
 - [WebSnapse + Numerical SN P systems (1)](https://github.com/CS199-Instrella-Vidad), by Reannu & John David
 
