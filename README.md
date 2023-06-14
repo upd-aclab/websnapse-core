@@ -54,16 +54,12 @@ The project is in a stage where emphasizing UI, UX, and DX becomes paramount, an
   - [GitHub repo](https://github.com/lmgal/websnapse-v3)
   - [page](https://websnapse-v3.netlify.app/)
 
-- WebSnapse + Numerical SN P systems (1), by Reannu & John David
+- WebSnapse + Numerical SN P systems, by Reannu & John David
 
   - [GitHub org](https://github.com/CS199-Instrella-Vidad)
   - [landing page](https://snapse.website/)
   - [SN P page](https://snp.snapse.website/)
   - [NSN P page](https://nsnp.snapse.website/)
-
-- WebSnapse + Numerical SN P systems (2), by Rey &
-
-  - [GitHub org](https://github.com/numerical-websnapse)
 
 - WebSnapse + Homogenization, by Tim & Joshua
 
